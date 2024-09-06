@@ -1,10 +1,13 @@
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public int CountBee => _countBee;
+
     [SerializeField] private Movement _movement;
+
+    private int _countBee;
 
     private Vector2 _inputVector;
 
