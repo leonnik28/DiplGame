@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1298459629028261818}
   - component: {fileID: 8483540854673775346}
   m_Layer: 5
-  m_Name: DialSeconds
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

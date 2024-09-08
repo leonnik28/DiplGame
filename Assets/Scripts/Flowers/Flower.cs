@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class Flower : MonoBehaviour
 {
@@ -9,28 +10,44 @@ public class Flower : MonoBehaviour
     private bool _isPicking;
     private Coroutine _pickCoroutine;
 
+    private bool _isActiveFlower = true;
+
+    private GameSession _gameSession;
+
+    [Inject]
+    private void Construct(GameSession gameSession)
+    {
+        _gameSession = gameSession;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (_isActiveFlower && other.TryGetComponent(out Player player))
         {
             float timeToCollect = _settings.TimeToCollect / player.CountBee;
-            StartPicking(timeToCollect);
+            StartPicking(player, timeToCollect);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (_isActiveFlower && other.TryGetComponent(out Player _))
         {
             StopPicking();
         }
     }
 
-    private void StartPicking(float timeToCollect)
+    private void Complete()
+    {
+        _timer.gameObject.SetActive(false);
+        _isActiveFlower = false;
+    }
+
+    private void StartPicking(Player player, float timeToCollect)
     {
         if (_pickCoroutine == null)
         {
-            _pickCoroutine = StartCoroutine(PickCoroutine(timeToCollect));
+            _pickCoroutine = StartCoroutine(PickCoroutine(player, timeToCollect));
         }
     }
 
@@ -45,7 +62,7 @@ public class Flower : MonoBehaviour
         }
     }
 
-    private IEnumerator PickCoroutine(float timeToCollect)
+    private IEnumerator PickCoroutine(Player player, float timeToCollect)
     {
         _isPicking = true;
         _timer.gameObject.SetActive(true);
@@ -59,7 +76,7 @@ public class Flower : MonoBehaviour
 
         if (_isPicking)
         {
-            Debug.Log("Flower picked!");
+            Complete();
         }
         
         _isPicking = false;
