@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Movement _movement;
 
-    private int _countBee;
+    private int _countBee = 1;
 
     private Vector2 _inputVector;
 

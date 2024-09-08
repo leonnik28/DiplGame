@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
+    [SerializeField] private Timer _timer;
     [SerializeField] private FlowerSettings _settings;
 
     private bool _isPicking;
@@ -40,12 +41,15 @@ public class Flower : MonoBehaviour
             StopCoroutine(_pickCoroutine);
             _pickCoroutine = null;
             _isPicking = false;
+            _timer.gameObject.SetActive(false);
         }
     }
 
     private IEnumerator PickCoroutine(float timeToCollect)
     {
         _isPicking = true;
+        _timer.gameObject.SetActive(true);
+        _timer.StartTimer(timeToCollect);
         float startTime = Time.time;
 
         while (_isPicking && Time.time - startTime < timeToCollect)
@@ -57,7 +61,7 @@ public class Flower : MonoBehaviour
         {
             Debug.Log("Flower picked!");
         }
-        // прогресс завершен
+        
         _isPicking = false;
         _pickCoroutine = null;
     }
