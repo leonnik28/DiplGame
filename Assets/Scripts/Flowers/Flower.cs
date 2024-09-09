@@ -12,12 +12,12 @@ public class Flower : MonoBehaviour
 
     private bool _isActiveFlower = true;
 
-    private GameSession _gameSession;
+    private Bag _bag;
 
     [Inject]
-    private void Construct(GameSession gameSession)
+    private void Construct(Bag bag)
     {
-        _gameSession = gameSession;
+        _bag = bag;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +41,7 @@ public class Flower : MonoBehaviour
     {
         _timer.gameObject.SetActive(false);
         _isActiveFlower = false;
+        _bag.GetMoney(_settings.MoneyForCollection);
     }
 
     private void StartPicking(Player player, float timeToCollect)

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Zenject;
 
 public class UserData
@@ -24,12 +25,13 @@ public class UserData
         _storageService = storageService;
     }
 
-    public async void Save(SaveData data)
+    public async Task Save(SaveData data)
     {
+        _data = data;
         await _storageService.SaveAsync(_key, data);
     }
 
-    public async void Load()
+    public async Task Load()
     {
         _data = await _storageService.LoadAsync<SaveData>(_key);
     }

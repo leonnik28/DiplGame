@@ -15,15 +15,15 @@ public class GameSession : IInitializable, IDisposable
 
     public void Initialize()
     {
-        
+        LoadData();
     }
 
     public void Dispose()
     {
-
+        SaveData();
     }
 
-    public void SaveData(int countBee = 1, int countMoney = -1)
+    public async void SaveData(int countBee = 1, int countMoney = -1)
     {
         UserData.SaveData data = new UserData.SaveData() { 
             countBee = countBee,
@@ -37,13 +37,13 @@ public class GameSession : IInitializable, IDisposable
         {
             data.countMoney = _userData.Data.countMoney;
         }
-        _userData.Save(data);
+        await _userData.Save(data);
         OnDataChange?.Invoke(data);
     }
 
-    public void LoadData()
+    public async void LoadData()
     {
-        _userData.Load();
+        await _userData.Load();
         OnDataChange?.Invoke(_userData.Data);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Animator _animator;
 
     [Header("Properties")]
     [SerializeField] private float _moveSpeed = 5f;
@@ -15,6 +16,13 @@ public class Movement : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             Rotate(moveDirection);
+            _animator.SetTrigger("Move");
+            _animator.ResetTrigger("Idle");
+        }
+        else
+        {
+            _animator.ResetTrigger("Move");
+            _animator.SetTrigger("Idle");
         }
 
         moveDirection = _characterController.transform.forward * inputVector.y + _characterController.transform.right * inputVector.x;
