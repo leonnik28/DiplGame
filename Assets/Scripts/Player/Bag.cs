@@ -16,7 +16,7 @@ public class Bag
 
     public void GetMoney(int money)
     {
-        _countMoneyInBag = money;
+        _countMoneyInBag += money;
     }
 
     public void FoldMoney()

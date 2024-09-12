@@ -23,15 +23,15 @@ public class GameSession : IInitializable, IDisposable
         SaveData();
     }
 
-    public async void SaveData(int countBee = 1, int countMoney = -1)
+    public async void SaveData(int level = 1, int countMoney = -1)
     {
         UserData.SaveData data = new UserData.SaveData() { 
-            countBee = countBee,
+            levelBee = level,
             countMoney = countMoney
         };
-        if (countBee == 1)
+        if (level == 1)
         {
-            data.countBee = _userData.Data.countBee;
+            data.levelBee = _userData.Data.levelBee;
         }
         if (countMoney == -1)
         {

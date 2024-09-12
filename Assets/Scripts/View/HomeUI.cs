@@ -22,7 +22,7 @@ public class HomeUI : MonoBehaviour
     {
         if (_beeCost <= _userData.Data.countMoney)
         {
-            _gameSession.SaveData(_userData.Data.countBee + 1, _userData.Data.countMoney - _beeCost);
+            _gameSession.SaveData(_userData.Data.levelBee + 1, _userData.Data.countMoney - _beeCost);
         }
     }
 }

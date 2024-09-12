@@ -12,13 +12,10 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _beePrefab;
 
     private int _countBee = 0;
-    private int _currentBeeCount = 0;
 
     private Vector2 _inputVector;
 
     private GameSession _gameSession;
-
-    private List<Vector3> _beePositions = new List<Vector3>();
 
     [Inject]
     private void Construct(GameSession gameSession)
@@ -31,6 +28,11 @@ public class Player : MonoBehaviour
         _gameSession.OnDataChange += UpdateData;
     }
 
+    private void Update()
+    {
+        _movement.Move(_inputVector);
+    }
+
     private void OnDisable()
     {
         _gameSession.OnDataChange -= UpdateData;
@@ -38,49 +40,14 @@ public class Player : MonoBehaviour
 
     private void UpdateData(UserData.SaveData data)
     {
-        if (data.countBee > 0 && _countBee != data.countBee)
+        if (data.levelBee > 0 && _countBee != data.levelBee)
         {
-            _countBee = data.countBee;
-            SpawnBeesInTriangle();
+            _countBee = data.levelBee;
         }
         else
         {
             _countBee = 1;
         }
-    }
-
-    private void SpawnBeesInTriangle()
-    {
-        int beesToSpawn = _countBee - _currentBeeCount;
-        if (beesToSpawn <= 0) return;
-
-        int rows = Mathf.CeilToInt(Mathf.Sqrt(_countBee));
-        int currentIndex = _currentBeeCount;
-
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j <= i; j++)
-            {
-                if (currentIndex >= _countBee)
-                {
-                    break;
-                }
-                Vector3 spawnPosition = transform.position + _spawnOffset + new Vector3(j, 0, -i);
-                if (!_beePositions.Contains(spawnPosition))
-                {
-                    GameObject bee = Instantiate(_beePrefab, spawnPosition, transform.rotation, transform);
-                    _beePositions.Add(spawnPosition);
-                    currentIndex++;
-                }
-            }
-        }
-
-        _currentBeeCount = _countBee;
-    }
-
-    private void Update()
-    {
-        _movement.Move(_inputVector);
     }
 
     private void OnMove(InputValue value)

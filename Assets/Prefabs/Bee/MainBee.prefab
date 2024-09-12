@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 95333843763016992}
   - component: {fileID: 4884024876751906110}
   m_Layer: 0
-  m_Name: FantasyBee
+  m_Name: MainBee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

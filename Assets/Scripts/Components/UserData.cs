@@ -7,7 +7,7 @@ public class UserData
     [Serializable]
     public struct SaveData
     {
-        public int countBee;
+        public int levelBee;
         public int countMoney;
     }
 
