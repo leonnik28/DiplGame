@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
-
 public class BiomeGenerator : MonoBehaviour
 {
     [SerializeField] private BiomeSettings[] _biomeSettings;
@@ -16,7 +15,6 @@ public class BiomeGenerator : MonoBehaviour
     private void Start()
     {
         MapData mapData = _mapSaver.LoadMap();
-
         GenerateBiomes();
     }
 
@@ -24,31 +22,25 @@ public class BiomeGenerator : MonoBehaviour
     {
         List<MapData.BiomeData> biomeDataList = new List<MapData.BiomeData>();
         List<Rect> biomeRects = new List<Rect>();
-
         int order = Mathf.CeilToInt(Mathf.Log(_biomeCount, 2));
         Vector2Int[] hilbertCurve = HilbertCurve.GenerateHilbertCurve(order);
-
         for (int i = 0; i < _biomeCount; i++)
         {
             BiomeSettings biomeSettings = GetBiomeSettingsByPerlinNoise(i);
             int sizeX = Random.Range(biomeSettings.MinSizeX, biomeSettings.MaxSizeX);
             int sizeY = Random.Range(biomeSettings.MinSizeY, biomeSettings.MaxSizeY);
-
             Vector3 position;
             if (biomeRects.Count == 0)
             {
-                // Первый биом размещается в начальной точке
                 position = new Vector3(hilbertCurve[i].x * sizeX, 0, hilbertCurve[i].y * sizeY);
             }
             else
             {
-                // Новый биом размещается рядом с существующими биомами
-                position = FindBestPosition(sizeX, sizeY, biomeRects);
+                Rect lastBiomeRect = biomeRects[biomeRects.Count - 1];
+                position = FindBestPosition(lastBiomeRect, sizeX, sizeY, biomeRects);
             }
-
             Rect biomeRect = new Rect(position.x, position.z, sizeX, sizeY);
-
-            // Проверка на перекрытие и корректировка позиции
+            
             bool overlaps = false;
             foreach (var rect in biomeRects)
             {
@@ -58,7 +50,6 @@ public class BiomeGenerator : MonoBehaviour
                     break;
                 }
             }
-
             if (!overlaps)
             {
                 GameObject biomeObject = _biomeFactory.Create(biomeSettings, position, sizeX, sizeY);
@@ -71,13 +62,11 @@ public class BiomeGenerator : MonoBehaviour
             }
             else
             {
-                // Попытка найти свободное место рядом с существующими биомами
                 bool placed = false;
                 foreach (var rect in biomeRects)
                 {
                     Vector3 newPosition = new Vector3(rect.xMax, 0, rect.y);
                     Rect newBiomeRect = new Rect(newPosition.x, newPosition.z, sizeX, sizeY);
-
                     bool newOverlaps = false;
                     foreach (var otherRect in biomeRects)
                     {
@@ -87,7 +76,6 @@ public class BiomeGenerator : MonoBehaviour
                             break;
                         }
                     }
-
                     if (!newOverlaps)
                     {
                         position = newPosition;
@@ -96,14 +84,12 @@ public class BiomeGenerator : MonoBehaviour
                         break;
                     }
                 }
-
                 if (!placed)
                 {
                     foreach (var rect in biomeRects)
                     {
                         Vector3 newPosition = new Vector3(rect.x, 0, rect.yMax);
                         Rect newBiomeRect = new Rect(newPosition.x, newPosition.z, sizeX, sizeY);
-
                         bool newOverlaps = false;
                         foreach (var otherRect in biomeRects)
                         {
@@ -113,7 +99,6 @@ public class BiomeGenerator : MonoBehaviour
                                 break;
                             }
                         }
-
                         if (!newOverlaps)
                         {
                             position = newPosition;
@@ -123,7 +108,6 @@ public class BiomeGenerator : MonoBehaviour
                         }
                     }
                 }
-
                 if (placed)
                 {
                     GameObject biomeObject = _biomeFactory.Create(biomeSettings, position, sizeX, sizeY);
@@ -136,94 +120,44 @@ public class BiomeGenerator : MonoBehaviour
                 }
             }
         }
-
-        // Заполнение пустых мест между биомами чанками
-        FillEmptySpacesWithChunks(biomeRects);
-
         MapData mapData = new MapData
         {
             Biomes = biomeDataList
         };
-
         _mapSaver.SaveMap(mapData);
     }
 
-    private Vector3 FindBestPosition(int sizeX, int sizeY, List<Rect> biomeRects)
+    private Vector3 FindBestPosition(Rect lastBiomeRect, int sizeX, int sizeY, List<Rect> biomeRects)
     {
         Vector3[] directions = new Vector3[]
         {
-            new Vector3(1, 0, 0), // Вправо
-            new Vector3(0, 0, 1), // Вверх
-            new Vector3(-1, 0, 0), // Влево
-            new Vector3(0, 0, -1), // Вниз
+        new Vector3(lastBiomeRect.xMax, 0, lastBiomeRect.y), 
+        new Vector3(lastBiomeRect.x, 0, lastBiomeRect.yMax),
+        new Vector3(lastBiomeRect.xMin - sizeX, 0, lastBiomeRect.y), 
+        new Vector3(lastBiomeRect.x, 0, lastBiomeRect.yMin - sizeY), 
         };
 
-        // Перемешиваем направления для случайного выбора
         System.Random random = new System.Random();
         directions = directions.OrderBy(a => random.Next()).ToArray();
-
-        foreach (var rect in biomeRects)
+        foreach (var direction in directions)
         {
-            foreach (var direction in directions)
+            Rect newBiomeRect = new Rect(direction.x, direction.z, sizeX, sizeY);
+            bool overlaps = false;
+            foreach (var rect in biomeRects)
             {
-                Vector3 newPosition = new Vector3(rect.x + direction.x * sizeX, 0, rect.y + direction.z * sizeY);
-                Rect newBiomeRect = new Rect(newPosition.x, newPosition.z, sizeX, sizeY);
-                bool overlaps = false;
-
-                foreach (var otherRect in biomeRects)
+                if (newBiomeRect.Overlaps(rect))
                 {
-                    if (newBiomeRect.Overlaps(otherRect))
-                    {
-                        overlaps = true;
-                        break;
-                    }
-                }
-
-                if (!overlaps)
-                {
-                    return newPosition;
+                    overlaps = true;
+                    break;
                 }
             }
-        }
-
-        // Если не найдено подходящее место, возвращаем начальную позицию
-        return new Vector3(biomeRects[0].xMax, 0, biomeRects[0].y);
-    }
-
-    private void FillEmptySpacesWithChunks(List<Rect> biomeRects)
-    {
-        // Определяем границы всех биомов
-        float minX = biomeRects.Min(r => r.x);
-        float maxX = biomeRects.Max(r => r.xMax);
-        float minY = biomeRects.Min(r => r.y);
-        float maxY = biomeRects.Max(r => r.yMax);
-
-        // Перебираем все клетки в пределах границ
-        for (float x = minX; x < maxX; x++)
-        {
-            for (float y = minY; y < maxY; y++)
+            if (!overlaps)
             {
-                bool isFilled = false;
-
-                foreach (var rect in biomeRects)
-                {
-                    if (rect.Contains(new Vector2(x, y)))
-                    {
-                        isFilled = true;
-                        break;
-                    }
-                }
-
-                if (!isFilled)
-                {
-                    // Создаем чанк в пустой клетке с настройками соседнего биома
-                    Vector3 position = new Vector3(x, 0, y);
-                    _biomeFactory.Create(_biomeSettings[0], position);
-                }
+                return direction;
             }
         }
+        return new Vector3(lastBiomeRect.xMax, 0, lastBiomeRect.y);
     }
-
 
     private void LoadBiomes(MapData mapData)
     {
@@ -239,10 +173,19 @@ public class BiomeGenerator : MonoBehaviour
 
     private BiomeSettings GetBiomeSettingsByPerlinNoise(int index)
     {
+        // Генерируем значение шума Перлина
         float noiseValue = Mathf.PerlinNoise(index * _perlinScale + _seed, _seed);
-        int biomeIndex = Mathf.FloorToInt(noiseValue * _biomeSettings.Length);
+
+        // Нормализуем значение шума Перлина (оно уже находится в диапазоне [0, 1])
+        float normalizedNoiseValue = noiseValue;
+
+        // Масштабируем нормализованное значение шума до диапазона индексов биомов
+        int biomeIndex = Mathf.FloorToInt(normalizedNoiseValue * (_biomeSettings.Length));
+
+        // Возвращаем соответствующий биом сеттинг
         return _biomeSettings[biomeIndex];
     }
+
 
     private BiomeSettings GetBiomeByName(string biomeName)
     {

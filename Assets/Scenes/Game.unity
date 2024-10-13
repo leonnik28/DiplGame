@@ -508,7 +508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.3784545, y: -1.1915201e-15, z: 4.8717206e-16, w: 0.9256199}
-  m_LocalPosition: {x: 0, y: 3.57, z: -3.21}
+  m_LocalPosition: {x: 0, y: 3.9299998, z: -3.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -597,8 +597,9 @@ MonoBehaviour:
   _biomeSettings:
   - {fileID: 11400000, guid: 985c6eee072ca644888f50b574b97922, type: 2}
   - {fileID: 11400000, guid: 050e14523e3d0aa409aeb577fa2cae00, type: 2}
-  _biomeCount: 15
-  _perlinScale: 0.1
+  - {fileID: 11400000, guid: bb8c4825854faa1428786ba5ffa5ed87, type: 2}
+  _biomeCount: 30
+  _perlinScale: 0.2
   _seed: 0
 --- !u!1 &1156689277 stripped
 GameObject:
@@ -1145,7 +1146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4351591160076318729, guid: 1d8de54f658a0f148afa0298a0c805e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4351591160076318729, guid: 1d8de54f658a0f148afa0298a0c805e6, type: 3}
       propertyPath: m_LocalPosition.z
