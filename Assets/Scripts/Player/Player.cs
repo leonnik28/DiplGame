@@ -1,15 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     public int CountBee => _countBee;
 
     [SerializeField] private Movement _movement;
-    [SerializeField] private Vector3 _spawnOffset;
-    [SerializeField] private GameObject _beePrefab;
 
     private int _countBee = 0;
 

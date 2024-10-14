@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sizeX: 1
   _sizeY: 1
-  _landscapePrefab: {fileID: 8189699762064820334, guid: 4afbd43c3ae9b3849a35457c475149a5, type: 3}
+  _landscapePrefab: {fileID: 1848483671699966, guid: d70779e319d6941b5bf515de3b125fa7, type: 3}
