@@ -12,5 +12,6 @@ public class MapData
     {
         public string BiomeName;
         public Vector3 Position;
+        public List<Vector3> WallPositions;
     }
 }

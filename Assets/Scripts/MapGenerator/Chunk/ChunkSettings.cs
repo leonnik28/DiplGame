@@ -1,15 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Chunk", menuName = "Chunk/Create New Chunk Settings")]
+[CreateAssetMenu(fileName = "ChunkSettings", menuName = "ScriptableObjects/ChunkSettings", order = 1)]
 public class ChunkSettings : ScriptableObject
 {
-    public int SizeX => _sizeX;
-    public int SizeY => _sizeY;
+    public GameObject ChunkPrefab => _chunkPrefab;
 
-    [SerializeField] private int _sizeX;
-    [SerializeField] private int _sizeY;
-
-    [SerializeField] private GameObject _landscapePrefab;
-
-    public GameObject LandscapePrefab => _landscapePrefab;
+    [SerializeField] private GameObject _chunkPrefab;
 }
