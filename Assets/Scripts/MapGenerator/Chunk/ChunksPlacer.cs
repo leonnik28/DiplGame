@@ -45,7 +45,6 @@ public class ChunksPlacer : MonoBehaviour
             }
         }
 
-        // Debugging: Print the number of placed chunks
         Debug.Log($"Placed {placedChunks} chunks out of {_roomCount} requested.");
     }
 

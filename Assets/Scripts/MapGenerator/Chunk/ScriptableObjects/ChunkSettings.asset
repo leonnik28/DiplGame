@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b927d2ee5760c7a41b82033d83626d5f, type: 3}
   m_Name: ChunkSettings
   m_EditorClassIdentifier: 
-  _chunkPrefab: {fileID: 8189699762064820334, guid: 2f204d1ff02ebc14eb5f2db7f80201df, type: 3}
+  _chunkPrefab: {fileID: 1005778558708038434, guid: b711f39d6136cfd45b1a762809a0d8fb, type: 3}

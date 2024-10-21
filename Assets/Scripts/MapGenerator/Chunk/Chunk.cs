@@ -17,6 +17,21 @@ public class Chunk : MonoBehaviour
     public void RotateRandomly(System.Random random)
     {
         int randomRotation = random.Next(0, 4);
-        transform.Rotate(0, randomRotation * 90, 0);
+
+        for (int i = 0; i < randomRotation; i++)
+        {
+            RotateClockwise();
+        }
+    }
+
+    private void RotateClockwise()
+    {
+        transform.Rotate(0, 90, 0);
+
+        GameObject tmp = _doorLeft;
+        _doorLeft = _doorDown;
+        _doorDown = _doorRight;
+        _doorRight = _doorUp;
+        _doorUp = tmp;
     }
 }

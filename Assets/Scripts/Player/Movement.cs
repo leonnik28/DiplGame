@@ -3,6 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Animator _animator;
 
     [Header("Properties")]
@@ -16,17 +17,15 @@ public class Movement : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             Rotate(moveDirection);
-            _animator.SetTrigger("Move");
-            _animator.ResetTrigger("Idle");
+            _animator.SetInteger("animation", 10);
         }
         else
         {
-            _animator.ResetTrigger("Move");
-            _animator.SetTrigger("Idle");
+            _animator.SetInteger("animation", 1);
         }
 
-        moveDirection = _characterController.transform.forward * inputVector.y + _characterController.transform.right * inputVector.x;
-        _characterController.Move(_moveSpeed * Time.deltaTime * moveDirection);
+        Vector3 velocity = moveDirection * _moveSpeed;
+        _rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
     }
 
     private void Rotate(Vector3 moveDirection)
