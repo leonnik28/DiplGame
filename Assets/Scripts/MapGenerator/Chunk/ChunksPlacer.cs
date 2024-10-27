@@ -12,8 +12,7 @@ public class ChunksPlacer : MonoBehaviour
     [SerializeField] private Chunk _startingChunk;
     [SerializeField] private int _seed;
 
-    private Chunk[,] _spawnedChunks;
-    private int _gridSize;
+    private Dictionary<Vector2Int, Chunk> _spawnedChunks;
     private System.Random _random;
     private ChunkFactory _chunkFactory;
 
@@ -27,16 +26,15 @@ public class ChunksPlacer : MonoBehaviour
     {
         _random = new System.Random(_seed);
 
-        _gridSize = Mathf.CeilToInt(Mathf.Sqrt(_roomCount));
-        _spawnedChunks = new Chunk[_gridSize, _gridSize];
-        _spawnedChunks[0, 0] = _startingChunk;
+        _spawnedChunks = new Dictionary<Vector2Int, Chunk>();
+        _spawnedChunks[Vector2Int.zero] = _startingChunk;
 
         int placedChunks = 1;
 
         while (placedChunks < _roomCount)
         {
             Vector2Int position = GetRandomPosition();
-            if (_spawnedChunks[position.x, position.y] == null)
+            if (!_spawnedChunks.ContainsKey(position))
             {
                 if (PlaceOneChunk(position))
                 {
@@ -50,8 +48,8 @@ public class ChunksPlacer : MonoBehaviour
 
     private Vector2Int GetRandomPosition()
     {
-        int x = _random.Next(_gridSize);
-        int y = _random.Next(_gridSize);
+        int x = _random.Next(-_roomCount, _roomCount);
+        int y = _random.Next(-_roomCount, _roomCount);
         return new Vector2Int(x, y);
     }
 
@@ -65,7 +63,7 @@ public class ChunksPlacer : MonoBehaviour
 
         if (ConnectToSomething(newChunk, position))
         {
-            _spawnedChunks[position.x, position.y] = newChunk;
+            _spawnedChunks[position] = newChunk;
             return true;
         }
         else
@@ -77,20 +75,17 @@ public class ChunksPlacer : MonoBehaviour
 
     private bool ConnectToSomething(Chunk chunk, Vector2Int p)
     {
-        int maxX = _spawnedChunks.GetLength(0) - 1;
-        int maxY = _spawnedChunks.GetLength(1) - 1;
-
         List<Vector2Int> neighbours = new List<Vector2Int>();
 
-        if (chunk.DoorUp != null && p.y < maxY && _spawnedChunks[p.x, p.y + 1]?.DoorDown != null) neighbours.Add(Vector2Int.up);
-        if (chunk.DoorDown != null && p.y > 0 && _spawnedChunks[p.x, p.y - 1]?.DoorUp != null) neighbours.Add(Vector2Int.down);
-        if (chunk.DoorRight != null && p.x < maxX && _spawnedChunks[p.x + 1, p.y]?.DoorLeft != null) neighbours.Add(Vector2Int.right);
-        if (chunk.DoorLeft != null && p.x > 0 && _spawnedChunks[p.x - 1, p.y]?.DoorRight != null) neighbours.Add(Vector2Int.left);
+        if (chunk.DoorUp != null && _spawnedChunks.TryGetValue(p + Vector2Int.up, out Chunk upChunk) && upChunk.DoorDown != null) neighbours.Add(Vector2Int.up);
+        if (chunk.DoorDown != null && _spawnedChunks.TryGetValue(p + Vector2Int.down, out Chunk downChunk) && downChunk.DoorUp != null) neighbours.Add(Vector2Int.down);
+        if (chunk.DoorRight != null && _spawnedChunks.TryGetValue(p + Vector2Int.right, out Chunk rightChunk) && rightChunk.DoorLeft != null) neighbours.Add(Vector2Int.right);
+        if (chunk.DoorLeft != null && _spawnedChunks.TryGetValue(p + Vector2Int.left, out Chunk leftChunk) && leftChunk.DoorRight != null) neighbours.Add(Vector2Int.left);
 
         if (neighbours.Count == 0) return false;
 
         Vector2Int selectedDirection = neighbours[_random.Next(neighbours.Count)];
-        Chunk selectedChunk = _spawnedChunks[p.x + selectedDirection.x, p.y + selectedDirection.y];
+        Chunk selectedChunk = _spawnedChunks[p + selectedDirection];
 
         if (selectedDirection == Vector2Int.up)
         {

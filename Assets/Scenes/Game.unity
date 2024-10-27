@@ -608,12 +608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f016b0dcff9c042a2085910d18fa02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomCount: 15
+  _roomCount: 20
   _chunkSettings:
   - {fileID: 11400000, guid: 1480deb5ecfab4d499a24f99511249a8, type: 2}
   - {fileID: 11400000, guid: 68c238e363be525449a174d120491c9b, type: 2}
   _startingChunk: {fileID: 1915537721}
-  _seed: 1
+  _seed: 1234
 --- !u!1001 &1481007599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1224,6 +1224,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6873360281743138212, guid: fc2ae92d5d008c042b9280bac74e2e2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7694643112678404095, guid: fc2ae92d5d008c042b9280bac74e2e2f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
