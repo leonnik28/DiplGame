@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class MoneyResource : BaseResource
 {
-    [SerializeField] private MoneySettings _settings;
+    public MoneySettings MoneySettings => _settings as MoneySettings;
+
+    public MoneyResource(MoneySettings settings, ResourceFactory resourceFactory)
+    {
+        _settings = settings;
+        _resourceFactory = resourceFactory;
+    }
 
     public override async UniTask Spawn(GameObject gameObject, Vector3 position)
     {
@@ -12,7 +18,5 @@ public class MoneyResource : BaseResource
 
     protected override void Collect()
     {
-        
     }
-
 }

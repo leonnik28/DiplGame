@@ -3,10 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
 public class ItemSettings : BaseResourceSettings
 {
+    public override System.Type ResourceType => typeof(ItemResource);
+
     public Type ItemType => _type;
     public MoneySettings Price;
     public int Level;
-    public GameObject GameObject;
+
+    public override GameObject SpawnObject
+    {
+        get => _spawnObject;
+        protected set => _spawnObject = value;
+    }
 
     [SerializeField] private Type _type;
 

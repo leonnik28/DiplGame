@@ -1,6 +1,6 @@
 using Zenject;
 
-public class GameComponentsInstaller : MonoInstaller
+public class DataInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {

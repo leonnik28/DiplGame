@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e566bc96b42135a4fb03050279296316, type: 3}
-  m_Name: New Chest
+  m_Script: {fileID: 11500000, guid: 0f91abc66ef7a7949a2a3809366d8c48, type: 3}
+  m_Name: New Item
   m_EditorClassIdentifier: 
-  HealtCount: 0
-  Resources:
-  - {fileID: 11400000, guid: 1bbc9bf0b1d82634c8964017ab7204e3, type: 2}
-  - {fileID: 11400000, guid: 6f24241181401b54fb88b5868897b530, type: 2}
+  _spawnObject: {fileID: 8096697165662045998, guid: 2203a4110f40ad248856fa914801f632, type: 3}
+  Price: {fileID: 11400000, guid: 6f24241181401b54fb88b5868897b530, type: 2}
+  Level: 0
+  _type: 2

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,9 +5,9 @@ public class Chest : MonoBehaviour
 {
     [SerializeField] private ChestSettings _settings;
 
-    private ItemPresenter _presenter;
+    private ResourcePresenter _presenter;
     [Inject]
-    private void Construct(ItemPresenter presenter)
+    private void Construct(ResourcePresenter presenter)
     {
         _presenter = presenter;
     }
@@ -26,9 +24,9 @@ public class Chest : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach(BaseResourceSettings resource in _settings.Resources)
+        foreach (BaseResourceSettings resource in _settings.Resources)
         {
-            _presenter.SpawnItem(gameObject.transform.position ,resource);
+            _presenter.SpawnItem(gameObject.transform.position, resource);
         }
     }
 }
