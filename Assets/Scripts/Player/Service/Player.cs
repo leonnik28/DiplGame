@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Movement _movement;
 
-    private int _countBee = 0;
+    private readonly int _countBee = 0;
 
     private Vector2 _inputVector;
 
@@ -37,14 +37,6 @@ public class Player : MonoBehaviour
 
     private void UpdateData(UserData.SaveData data)
     {
-        if (data.levelBee > 0 && _countBee != data.levelBee)
-        {
-            _countBee = data.levelBee;
-        }
-        else
-        {
-            _countBee = 1;
-        }
     }
 
     private void OnMove(InputValue value)

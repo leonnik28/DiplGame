@@ -1,30 +1,27 @@
+using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class Bag
 {
-    private int _countMoneyInBag;
+    private readonly List<BaseResource> _resourcesInBag = new List<BaseResource>();
 
     private GameSession _gameSession;
-    private UserData _userData;
 
     [Inject]
-    private void Construct(GameSession gameSession, UserData userData)
+    private void Construct(GameSession gameSession)
     {
         _gameSession = gameSession;
-        _userData = userData;
     }
 
-    public void GetMoney(int money)
+    public void GetResource(BaseResource resource)
     {
-        _countMoneyInBag += money;
+        _resourcesInBag.Add(resource);
+        Debug.Log(resource.ToString());
     }
 
-    public void FoldMoney()
+    public void SaveResources()
     {
-        if (_countMoneyInBag > 0)
-        {
-            _gameSession.SaveData(countMoney: _userData.Data.countMoney + _countMoneyInBag);
-            _countMoneyInBag = 0;
-        }
+        _ = _gameSession.SaveData(_resourcesInBag);
     }
 }

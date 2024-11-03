@@ -5,9 +5,16 @@ public class MoneySettings : BaseResourceSettings
 {
     public override System.Type ResourceType => typeof(MoneyResource);
 
-    public Type MoneyType => _type;
-    public int Count;
-
+    public Type MoneyType 
+    {  
+        get => _type;
+        set => _type = value;
+    }
+    public int Count 
+    { 
+        get => _count; 
+        set => _count = value; 
+    }
     public override GameObject SpawnObject
     {
         get => _spawnObject;
@@ -15,6 +22,9 @@ public class MoneySettings : BaseResourceSettings
     }
 
     [SerializeField] private Type _type;
+
+    [Range(1, 100)]
+    [SerializeField] private int _count;
     
     public enum Type
     {

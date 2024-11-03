@@ -668,7 +668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350966536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3719859, y: 3.1541467, z: 0.032805294}
+  m_LocalPosition: {x: 0.3719859, y: 0.604, z: 2.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1121,6 +1121,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1192012591714805115, guid: cc41b2e6631136c48ac509aa0938d0a6, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3289032999081202572, guid: cc41b2e6631136c48ac509aa0938d0a6, type: 3}
       propertyPath: m_Name
       value: ChunkStart

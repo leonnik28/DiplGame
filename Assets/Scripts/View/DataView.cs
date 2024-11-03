@@ -26,6 +26,5 @@ public class DataView : MonoBehaviour
 
     private void UpdateView(UserData.SaveData data)
     {
-        _moneyText.text = data.countMoney.ToString();
     }
 }

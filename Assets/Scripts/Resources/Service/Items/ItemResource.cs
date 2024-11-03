@@ -10,9 +10,4 @@ public class ItemResource : BaseResource
         _settings = settings;
         _resourceFactory = resourceFactory;
     }
-
-    public override async UniTask Spawn(GameObject gameObject, Vector3 position)
-    {
-        await base.Spawn(gameObject, position);
-    }
 }

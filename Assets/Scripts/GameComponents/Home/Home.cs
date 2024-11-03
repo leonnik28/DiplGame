@@ -17,7 +17,6 @@ public class Home : MonoBehaviour
     {
         if (other.TryGetComponent(out Player _))
         {
-            _bag.FoldMoney();
             _homeUI.SetActive(true);
         }
     }

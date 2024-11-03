@@ -7,10 +7,10 @@ public class ResourcePresenter : MonoBehaviour
 {
     [SerializeField] private List<BaseResourceSettings> _settings;
 
-    private List<BaseResource> resources = new List<BaseResource>();
+    private readonly List<BaseResource> resources = new List<BaseResource>();
 
     [Inject]
-    private DiContainer _container;
+    private readonly DiContainer _container;
 
     private void Awake()
     {
@@ -27,7 +27,10 @@ public class ResourcePresenter : MonoBehaviour
 
         if (targetResource != null)
         {
-            _ = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
+            GameObject spawnObject = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
+            var resourceObject = spawnObject.AddComponent<ResourceObject>();
+            _container.Inject(resourceObject);
+            resourceObject.Instantiate(targetResource);
         }
     }
 }

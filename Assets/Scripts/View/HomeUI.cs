@@ -20,9 +20,5 @@ public class HomeUI : MonoBehaviour
 
     public void BuyBee()
     {
-        if (_beeCost <= _userData.Data.countMoney)
-        {
-            _gameSession.SaveData(_userData.Data.levelBee + 1, _userData.Data.countMoney - _beeCost);
-        }
     }
 }

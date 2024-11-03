@@ -41,15 +41,11 @@ public class Flower : MonoBehaviour
     {
         _timer.gameObject.SetActive(false);
         _isActiveFlower = false;
-        _bag.GetMoney(_settings.MoneyForCollection);
     }
 
     private void StartPicking(Player player, float timeToCollect)
     {
-        if (_pickCoroutine == null)
-        {
-            _pickCoroutine = StartCoroutine(PickCoroutine(player, timeToCollect));
-        }
+        _pickCoroutine ??= StartCoroutine(PickCoroutine(player, timeToCollect));
     }
 
     private void StopPicking()

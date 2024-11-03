@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class GameSession : IInitializable, IDisposable
@@ -15,33 +17,28 @@ public class GameSession : IInitializable, IDisposable
 
     public void Initialize()
     {
-        LoadData();
+        _ = LoadData();
     }
 
     public void Dispose()
     {
-        SaveData();
+        
     }
 
-    public async void SaveData(int level = 1, int countMoney = -1)
+    public async UniTaskVoid SaveData(List<BaseResource> baseResources)
     {
-        UserData.SaveData data = new UserData.SaveData() { 
-            levelBee = level,
-            countMoney = countMoney
+        UserData.SaveData data = new UserData.SaveData()
+        {
+            resources = _userData.Data.resources
         };
-        if (level == 1)
-        {
-            data.levelBee = _userData.Data.levelBee;
-        }
-        if (countMoney == -1)
-        {
-            data.countMoney = _userData.Data.countMoney;
-        }
+        data.resources.AddRange(baseResources);
+        _userData.Data = data;
         await _userData.Save(data);
         OnDataChange?.Invoke(data);
     }
 
-    public async void LoadData()
+
+    public async UniTaskVoid LoadData()
     {
         await _userData.Load();
         OnDataChange?.Invoke(_userData.Data);

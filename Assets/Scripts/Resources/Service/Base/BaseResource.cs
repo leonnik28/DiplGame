@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using Zenject;
 
 public abstract class BaseResource
 {
@@ -11,21 +12,36 @@ public abstract class BaseResource
 
     private readonly int _timeToDestroy = 5;
 
-    public virtual async UniTask Spawn(GameObject gameObject, Vector3 position)
+    private Bag _bag;
+    [Inject]
+    private void Construct(Bag bag)
+    {
+        _bag = bag;
+    }
+
+    public virtual GameObject Spawn(GameObject gameObject, Vector3 position)
     {
         GameObject spawnObject = _resourceFactory.Create(gameObject, position, Quaternion.identity);
+        DestroyAfterDelay(spawnObject).Forget();
+        return spawnObject;
+    }
+
+    private async UniTaskVoid DestroyAfterDelay(GameObject spawnObject)
+    {
         await UniTask.Delay(TimeSpan.FromSeconds(_timeToDestroy));
         Destroy(spawnObject);
     }
 
-    protected virtual void Collect()
+    public virtual void Collect()
     {
-
+        _bag.GetResource(this);
     }
 
     protected virtual void Destroy(GameObject spawnObject)
     {
-        GameObject.Destroy(spawnObject);
-        spawnObject = null;
+        if (spawnObject)
+        {
+            GameObject.Destroy(spawnObject);
+        }
     }
 }

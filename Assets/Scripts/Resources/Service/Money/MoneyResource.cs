@@ -1,6 +1,3 @@
-using Cysharp.Threading.Tasks;
-using UnityEngine;
-
 public class MoneyResource : BaseResource
 {
     public MoneySettings MoneySettings => _settings as MoneySettings;
@@ -11,12 +8,31 @@ public class MoneyResource : BaseResource
         _resourceFactory = resourceFactory;
     }
 
-    public override async UniTask Spawn(GameObject gameObject, Vector3 position)
+    public override void Collect()
     {
-        await base.Spawn(gameObject, position);
+        if (MoneySettings.Count == 100)
+        {
+            UpdateMoneyType();
+        }
+        base.Collect();
     }
 
-    protected override void Collect()
+    private void UpdateMoneyType()
     {
+        switch (MoneySettings.MoneyType)
+        {
+            case MoneySettings.Type.Bronze:
+                MoneySettings.MoneyType = MoneySettings.Type.Silver;
+                break;
+            case MoneySettings.Type.Silver:
+                MoneySettings.MoneyType = MoneySettings.Type.Gold;
+                break;
+            case MoneySettings.Type.Gold:
+                MoneySettings.MoneyType = MoneySettings.Type.Platinum;
+                break;
+            case MoneySettings.Type.Platinum:
+                break;
+        }
+        MoneySettings.Count = 1;
     }
 }

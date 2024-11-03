@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zenject;
 
@@ -7,11 +9,14 @@ public class UserData
     [Serializable]
     public struct SaveData
     {
-        public int levelBee;
-        public int countMoney;
+        public List<BaseResource> resources;
     }
 
-    public SaveData Data => _data;
+    public SaveData Data 
+    { 
+        get => _data; 
+        set => _data = value; 
+    }
 
     private SaveData _data;
 
@@ -25,13 +30,13 @@ public class UserData
         _storageService = storageService;
     }
 
-    public async Task Save(SaveData data)
+    public async UniTask Save(SaveData data)
     {
         _data = data;
         await _storageService.SaveAsync(_key, data);
     }
 
-    public async Task Load()
+    public async UniTask Load()
     {
         _data = await _storageService.LoadAsync<SaveData>(_key);
     }
