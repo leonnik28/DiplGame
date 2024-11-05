@@ -24,9 +24,11 @@ public class Chest : MonoBehaviour
 
     private void OnDestroy()
     {
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 1;
         foreach (BaseResourceSettings resource in _settings.Resources)
         {
-            _presenter.SpawnItem(gameObject.transform.position, resource);
+            _presenter.SpawnItem(spawnPosition, resource);
         }
     }
 }

@@ -10,7 +10,7 @@ public abstract class BaseResource
     protected ResourceFactory _resourceFactory;
     protected BaseResourceSettings _settings;
 
-    private readonly int _timeToDestroy = 5;
+    private readonly int _timeToDestroy = 15;
 
     private Bag _bag;
     [Inject]

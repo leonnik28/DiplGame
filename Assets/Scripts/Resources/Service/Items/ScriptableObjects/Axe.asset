@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f91abc66ef7a7949a2a3809366d8c48, type: 3}
-  m_Name: New Item
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  _spawnObject: {fileID: 8405514901628242609, guid: 1cd4a9e17c67b9641aa507f86d19c7df, type: 3}
+  _spawnObject: {fileID: 4128605285963401444, guid: c9c34bc83203a304d9cc200f5ae261ad, type: 3}
   Price: {fileID: 11400000, guid: 6f24241181401b54fb88b5868897b530, type: 2}
-  Level: 0
-  _type: 2
+  Level: 1
+  _type: 0

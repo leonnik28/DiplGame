@@ -29,8 +29,8 @@ public class ResourcePresenter : MonoBehaviour
         {
             GameObject spawnObject = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
             var resourceObject = spawnObject.AddComponent<ResourceObject>();
-            _container.Inject(resourceObject);
             resourceObject.Instantiate(targetResource);
+            _container.Inject(resourceObject);
         }
     }
 }

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23e877978fcee2a46a745231d015a00f, type: 3}
-  m_Name: New Money
+  m_Name: Platinum
   m_EditorClassIdentifier: 
-  _spawnObject: {fileID: 4910839503119999646, guid: 38bdcf833d74f514cb88fb45c23c44bb, type: 3}
-  _type: 2
+  _spawnObject: {fileID: 8693825960231445845, guid: e4e654a759d7b9240976e7128ec5df7f, type: 3}
+  _type: 3
   _count: 1
