@@ -26,12 +26,6 @@ public abstract class BaseResource
         return spawnObject;
     }
 
-    private async UniTaskVoid DestroyAfterDelay(GameObject spawnObject)
-    {
-        await UniTask.Delay(TimeSpan.FromSeconds(_timeToDestroy));
-        Destroy(spawnObject);
-    }
-
     public virtual void Collect()
     {
         _bag.GetResource(this);
@@ -43,5 +37,11 @@ public abstract class BaseResource
         {
             GameObject.Destroy(spawnObject);
         }
+    }
+
+    private async UniTaskVoid DestroyAfterDelay(GameObject spawnObject)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(_timeToDestroy));
+        Destroy(spawnObject);
     }
 }

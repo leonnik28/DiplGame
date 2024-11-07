@@ -20,10 +20,7 @@ public class Chest : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
-    }
 
-    private void OnDestroy()
-    {
         Vector3 spawnPosition = transform.position;
         spawnPosition.y += 1;
         foreach (BaseResourceSettings resource in _settings.Resources)
