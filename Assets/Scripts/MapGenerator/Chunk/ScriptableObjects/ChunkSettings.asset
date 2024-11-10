@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ChunkSettings
   m_EditorClassIdentifier: 
   _chunkPrefab: {fileID: 1005778558708038434, guid: b711f39d6136cfd45b1a762809a0d8fb, type: 3}
+  _mobPosition: {x: -3.52642, y: 0, z: 3.78}

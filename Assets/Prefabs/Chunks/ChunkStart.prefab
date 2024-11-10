@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakesUp
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -279,6 +283,10 @@ PrefabInstance:
     - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_Name
       value: stakesDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
@@ -359,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakes (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -433,6 +445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile-plain
       objectReference: {fileID: 0}
+    - target: {fileID: 1871174464052898, guid: ad9d3c1bf87264ed8a89c188f2c1018c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4755125321900414, guid: ad9d3c1bf87264ed8a89c188f2c1018c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -502,6 +518,10 @@ PrefabInstance:
     - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_Name
       value: stakesLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
@@ -582,6 +602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakesRight
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -661,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -730,6 +758,10 @@ PrefabInstance:
     - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_Name
       value: stakes (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
@@ -805,6 +837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -874,6 +910,10 @@ PrefabInstance:
     - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_Name
       value: stakes (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
@@ -949,6 +989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakes (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1023,6 +1067,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stakes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1092,6 +1140,10 @@ PrefabInstance:
     - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_Name
       value: stakes (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181116, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481928, guid: 1ed2edca09b6b724da20c1e1e8825f82, type: 3}
       propertyPath: m_RootOrder

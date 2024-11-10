@@ -4,6 +4,8 @@ using UnityEngine;
 public class ChunkSettings : ScriptableObject
 {
     public GameObject ChunkPrefab => _chunkPrefab;
+    public Vector3 MobPosition => _mobPosition;
 
     [SerializeField] private GameObject _chunkPrefab;
+    [SerializeField] private Vector3 _mobPosition;
 }
