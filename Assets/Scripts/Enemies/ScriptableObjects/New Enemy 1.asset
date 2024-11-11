@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22defa1d03909e4cb6b07c5d1b66ce4, type: 3}
   m_Name: New Enemy 1
   m_EditorClassIdentifier: 
-  _detectionRadius: 5
+  _detectionRadius: 7.5
   _attackRadius: 1.7
   _returnToPositionRadius: 10
   _checkInterval: 0.2
-  _rotationSpeed: 10
+  _rotationSpeed: 3

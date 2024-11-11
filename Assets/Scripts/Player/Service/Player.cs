@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -47,10 +49,16 @@ public class Player : MonoBehaviour, IDamageble
         _gameSession.OnDataChange -= UpdateData;
     }
 
-    public void TakeDamage(int damage)
+    public async void TakeDamage(int damage)
     {
+        await DelayTakeDamage();
         _health -= damage;
         _animator.SetTrigger("takeDamage");
+    }
+
+    private async UniTask DelayTakeDamage()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3));
     }
 
     private void UpdateData(UserData.SaveData data)

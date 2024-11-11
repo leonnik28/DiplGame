@@ -13,11 +13,9 @@ public class EnemyAttack : BaseAttack
         if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
         {
             _lastAttackTime = Time.time;
-
-            _animator.SetTrigger("attack");
-
-            Collider[] hitPlayer = Physics.OverlapSphere(transform.position, _attackSettings.Range);
             await DelayAttack();
+            _animator.SetTrigger("attack");
+            Collider[] hitPlayer = Physics.OverlapSphere(transform.position, _attackSettings.Range);
             foreach (Collider hit in hitPlayer)
             {
                 if (hit.TryGetComponent<Player>(out Player player) && IsInCone(hit.transform.position, transform))
@@ -26,11 +24,10 @@ public class EnemyAttack : BaseAttack
                 }
             }
         }
-
     }
 
     private async UniTask DelayAttack()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.8));
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
     }
 }

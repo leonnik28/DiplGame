@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8557c33824d948d4991e5ff1b9ead182, type: 3}
   m_Name: New Enemy
   m_EditorClassIdentifier: 
-  _attackSettings: {fileID: 11400000, guid: 09e62a1fa30820443944a8092ab8299d, type: 2}
+  _attackSettings: {fileID: 11400000, guid: 38e8ae87fc421064baeb206dd249a1e7, type: 2}
   _movementSettings: {fileID: 11400000, guid: a31596484f0eedc47851a681e903fa83, type: 2}
   _health: 10
   _resources:

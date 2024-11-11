@@ -6,26 +6,30 @@ public class Enemy : MonoBehaviour, IDamageble
 {
     [SerializeField] private EnemySettings _settings;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Collider _triggerCollider;
 
     private EnemyAttack _attack;
-    [SerializeField] private EnemyMovement _movement;
+    private EnemyMovement _movement;
 
-    private NavMeshAgent _agent;
     private Player _player;
 
     private int _currentHealth;
     private ResourcePresenter _presenter;
 
     [Inject]
-    private void Construct(ResourcePresenter presenter)
+    private void Construct(ResourcePresenter presenter, Player player)
     {
         _presenter = presenter;
-        _currentHealth = _settings.Health;
+        _player = player;
     }
 
     private void Awake()
     {
+        _currentHealth = _settings.Health;
+
         _attack = new EnemyAttack(_settings.AttackSettings, _animator);
+        _movement = new EnemyMovement(_animator, _settings.MovementSettings, GetComponent<NavMeshAgent>(), _player);
+        _movement.Initialize();
         _movement.OnAttack += Attack;
     }
 
@@ -34,6 +38,22 @@ public class Enemy : MonoBehaviour, IDamageble
         if (Input.GetKeyDown(KeyCode.F))
         {
             _attack.Attack(transform);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInChildren<Player>())
+        {
+            _ = _movement.StartMove();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponentInChildren<Player>())
+        {
+            _movement.ReturnToInitialPosition();
         }
     }
 
@@ -54,10 +74,11 @@ public class Enemy : MonoBehaviour, IDamageble
 
     private void Die()
     {
-        _movement.StopMovement();
+        _movement.DestroyMovement();
         _animator.SetTrigger("die");
-        Collider collider = transform.GetComponentInChildren<Collider>();
+        Collider collider = transform.GetComponent<Collider>();
         collider.enabled = false;
+        _triggerCollider.enabled = false;
 
         Vector3 spawnPosition = transform.position;
         spawnPosition.y += 1;
@@ -65,5 +86,7 @@ public class Enemy : MonoBehaviour, IDamageble
         {
             _presenter.SpawnItem(spawnPosition, resource);
         }
+        _movement = null;
+        _attack = null;
     }
 }
