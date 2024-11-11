@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: New Enemy
   m_EditorClassIdentifier: 
   _attackSettings: {fileID: 11400000, guid: 09e62a1fa30820443944a8092ab8299d, type: 2}
+  _movementSettings: {fileID: 11400000, guid: a31596484f0eedc47851a681e903fa83, type: 2}
   _health: 10
   _resources:
   - {fileID: 11400000, guid: e07471a56a5a03445bc985f3dc90dfbb, type: 2}

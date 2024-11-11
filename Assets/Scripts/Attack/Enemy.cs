@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 public class Enemy : MonoBehaviour
@@ -7,6 +8,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     private EnemyAttack _attack;
+    [SerializeField] private EnemyMovement _movement;
+
+    private NavMeshAgent _agent;
+    private Player _player;
 
     private int _currentHealth;
     private ResourcePresenter _presenter;
@@ -16,6 +21,10 @@ public class Enemy : MonoBehaviour
     {
         _presenter = presenter;
         _currentHealth = _settings.Health;
+    }
+
+    private void Awake()
+    {
         _attack = new EnemyAttack(_settings.AttackSettings, _animator);
     }
 
@@ -39,7 +48,10 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        _movement.StopMovement();
         _animator.SetTrigger("die");
+        Collider collider = transform.GetComponent<Collider>();
+        collider.enabled = false;
 
         Vector3 spawnPosition = transform.position;
         spawnPosition.y += 1;

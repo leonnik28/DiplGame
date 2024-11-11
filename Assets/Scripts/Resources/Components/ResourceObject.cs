@@ -11,7 +11,7 @@ public class ResourceObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out _))
+        if (collision.gameObject.GetComponentInChildren<Player>())
         {
             _resource.Collect();
             Destroy(gameObject);
