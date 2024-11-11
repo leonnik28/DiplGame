@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8557c33824d948d4991e5ff1b9ead182, type: 3}
-  m_Name: New Enemy
+  m_Script: {fileID: 11500000, guid: 8526b7571a91e444daeb42e9af8f4086, type: 3}
+  m_Name: New Player Movement
   m_EditorClassIdentifier: 
-  _health: 0
+  _moveSpeed: 5
+  _rotationSpeed: 5

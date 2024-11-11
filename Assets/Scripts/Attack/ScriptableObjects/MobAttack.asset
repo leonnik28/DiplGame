@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e566bc96b42135a4fb03050279296316, type: 3}
-  m_Name: New Chest
+  m_Script: {fileID: 11500000, guid: 11a25256e46cb1f438fa06cf7d43ba01, type: 3}
+  m_Name: MobAttack
   m_EditorClassIdentifier: 
-  _healt: 1
-  _resources:
-  - {fileID: 11400000, guid: c0f16dab32362fc44b7368b7f64b2856, type: 2}
-  - {fileID: 11400000, guid: e07471a56a5a03445bc985f3dc90dfbb, type: 2}
+  _damage: 3
+  _range: 2
+  _angle: 90
+  _cooldownTime: 2

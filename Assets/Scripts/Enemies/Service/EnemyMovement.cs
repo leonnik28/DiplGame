@@ -3,10 +3,11 @@ using System;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public Action OnAttack;
+
     [SerializeField] private Animator _animator;
     [SerializeField] private EnemyMovementSettings _settings;
 
@@ -25,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponentInParent<NavMeshAgent>();
         _initialPosition = transform.position;
         _player = FindObjectOfType<Player>();
         _playerTransform = _player.transform;
@@ -70,7 +71,6 @@ public class EnemyMovement : MonoBehaviour
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                _animator.SetTrigger("die");
                 break;
             }
 
@@ -78,10 +78,9 @@ public class EnemyMovement : MonoBehaviour
 
             if (distanceToPlayer <= _settings.AttackRadius && !_isAttacking)
             {
+                OnAttack?.Invoke();
                 _agent.isStopped = true;
-                _animator.SetTrigger("attack"); // Анимация атаки
                 _isAttacking = true;
-                AttackPlayer();
             }
             else if (distanceToPlayer <= _settings.AttackRadius && _isAttacking)
             {
@@ -89,35 +88,39 @@ public class EnemyMovement : MonoBehaviour
             }
             else if (distanceToPlayer > _settings.ReturnToPositionRadius && !_isReturning)
             {
-                _animator.SetInteger("animations", 2); // Анимация движения
+                _animator.SetInteger("animations", 2);
                 _agent.SetDestination(_initialPosition);
                 _isReturning = true;
             }
             else if (_isReturning && Vector3.Distance(transform.position, _initialPosition) <= 0.1f)
             {
-                _animator.SetInteger("animations", 0); // Анимация ожидания
+                _animator.SetInteger("animations", 0);
                 _isReturning = false;
             }
             else if (distanceToPlayer <= _settings.DetectionRadius && !_isAttacking && !_isReturning)
             {
-                _animator.SetInteger("animations", 2); // Анимация движения
+                _animator.SetInteger("animations", 2);
                 _agent.isStopped = false;
                 _agent.SetDestination(_playerTransform.position);
             }
             else if (_isAttacking && distanceToPlayer > _settings.AttackRadius)
             {
-                _animator.SetInteger("animations", 2); // Анимация движения
+                _animator.SetInteger("animations", 2);
                 _isAttacking = false;
                 _agent.isStopped = false;
             }
 
+            if (_isAttacking)
+            {
+                Vector3 direction = (_playerTransform.position - _animator.transform.position);
+                direction.y = 0; // Ignore the y component
+                direction = direction.normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                _animator.transform.rotation = Quaternion.Slerp(_animator.transform.rotation, lookRotation, Time.deltaTime * _settings.RotationSpeed);
+            }
+
             await UniTask.Delay(TimeSpan.FromSeconds((int)_settings.CheckInterval));
         }
-    }
-
-    private void AttackPlayer()
-    {
-        // Логика атаки игрока
     }
 
     private void OnDestroy()

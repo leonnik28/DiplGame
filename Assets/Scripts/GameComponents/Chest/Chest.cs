@@ -1,9 +1,11 @@
 using UnityEngine;
 using Zenject;
 
-public class Chest : MonoBehaviour
+public class Chest : MonoBehaviour, IDamageble
 {
     [SerializeField] private ChestSettings _settings;
+
+    private int _healt;
 
     private ResourcePresenter _presenter;
     [Inject]
@@ -14,10 +16,19 @@ public class Chest : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject);
+        _healt = _settings.Healt;
     }
 
-    public void Destroy()
+    public void TakeDamage(int damage)
+    {
+        _healt -= damage;
+        if (_healt <= 0)
+        {
+            Destroy();
+        }
+    }
+
+    private void Destroy()
     {
         Destroy(gameObject);
 

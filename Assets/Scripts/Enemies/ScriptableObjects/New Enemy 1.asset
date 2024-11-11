@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: New Enemy 1
   m_EditorClassIdentifier: 
   _detectionRadius: 5
-  _attackRadius: 1.5
+  _attackRadius: 1.7
   _returnToPositionRadius: 10
   _checkInterval: 0.2
+  _rotationSpeed: 10

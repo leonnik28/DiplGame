@@ -17,9 +17,12 @@ public class PlayerAttack : BaseAttack
             foreach (Collider hitEnemy in hitEnemies)
             {
                 Debug.Log(hitEnemy);
-                if (hitEnemy.TryGetComponent<Enemy>(out Enemy enemy) && IsInCone(hitEnemy.transform.position, transform))
+                if (hitEnemy.TryGetComponent<IDamageble>(out IDamageble enemy) && IsInCone(hitEnemy.transform.position, transform))
                 {
-                    enemy.TakeDamage(_attackSettings.Damage);
+                    if (enemy.GetType() != typeof(Player))
+                    {
+                        enemy.TakeDamage(_attackSettings.Damage);
+                    }
                 }
             }
         }

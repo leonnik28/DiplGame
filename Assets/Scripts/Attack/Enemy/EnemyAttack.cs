@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class EnemyAttack : BaseAttack
@@ -6,7 +8,7 @@ public class EnemyAttack : BaseAttack
 
     public EnemyAttack(AttackSettings attackSettings, Animator animator) : base(attackSettings, animator) { }
 
-    public override void Attack(Transform transform)
+    public override async void Attack(Transform transform)
     {
         if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
         {
@@ -15,15 +17,20 @@ public class EnemyAttack : BaseAttack
             _animator.SetTrigger("attack");
 
             Collider[] hitPlayer = Physics.OverlapSphere(transform.position, _attackSettings.Range);
+            await DelayAttack();
             foreach (Collider hit in hitPlayer)
             {
-                Debug.Log(hit);
                 if (hit.TryGetComponent<Player>(out Player player) && IsInCone(hit.transform.position, transform))
                 {
-                   // player.TakeDamage(_attackSettings.Damage);
+                    player.TakeDamage(_attackSettings.Damage);
                 }
             }
         }
 
+    }
+
+    private async UniTask DelayAttack()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(0.8));
     }
 }

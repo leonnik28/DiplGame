@@ -5,8 +5,8 @@ using UnityEngine;
 public class ChestSettings : ScriptableObject
 {
     public List<BaseResourceSettings> Resources { get => _resources; set => _resources = value; }
-    public int HealtCount { get => _healtCount; set => _healtCount = value; }
+    public int Healt { get => _healt; set => _healt = value; }
 
-    [SerializeField] private int _healtCount;
+    [SerializeField] private int _healt;
     [SerializeField] private List<BaseResourceSettings> _resources;
 }
