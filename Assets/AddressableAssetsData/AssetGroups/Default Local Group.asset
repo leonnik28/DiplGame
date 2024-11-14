@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2931147886682674ebbb2c72a55c6a0c
+  m_SerializeEntries:
+  - m_GUID: c717f817a496cf247a92b830b355a407
+    m_Address: Assets/Prefabs/Bee/MainBee.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9c34bc83203a304d9cc200f5ae261ad
+    m_Address: Assets/Prefabs/GameResources/axe.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ef799913fd02a1a4d9a9da558e581a44
+    m_Address: Assets/Prefabs/GameResources/Money/Bronze.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 42078f7166e79174cba3e3aa5bfb7208
+    m_Address: Assets/Prefabs/GameResources/Money/Silver.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8495add9e159f884a907a53f45ea0711
+    m_Address: Assets/Prefabs/Chunks/Bat.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53af189b15066ec4f8cdcb55d1bd1a88
+    m_Address: Assets/Prefabs/GameResources/Money/gold.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e4e654a759d7b9240976e7128ec5df7f
+    m_Address: Assets/Prefabs/GameResources/Money/Platinum.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc41b2e6631136c48ac509aa0938d0a6
+    m_Address: Assets/Prefabs/Chunks/ChunkStart.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b711f39d6136cfd45b1a762809a0d8fb
+    m_Address: Assets/Prefabs/Chunks/Chunk1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 19b8a90368949b847b5a62dfbccc266a
+    m_Address: Assets/Prefabs/Chunks/Chunk2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 219cb012acf75664ea38f11a3bd28eb5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 482a81078d7a5a84898200fb42d2ffad, type: 2}
+    - {fileID: 11400000, guid: 2c1525f1bd4810f44b295b82d55b5186, type: 2}
