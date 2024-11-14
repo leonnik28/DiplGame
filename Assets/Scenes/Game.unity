@@ -543,7 +543,6 @@ GameObject:
   m_Component:
   - component: {fileID: 967214795}
   - component: {fileID: 967214798}
-  - component: {fileID: 967214799}
   - component: {fileID: 967214800}
   m_Layer: 0
   m_Name: Ground
@@ -587,24 +586,6 @@ MonoBehaviour:
   _seed: 1234
   _mobPrefab: {fileID: 2289811882078314816, guid: 8495add9e159f884a907a53f45ea0711, type: 3}
   _meshSurface: {fileID: 1682839456}
---- !u!114 &967214799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967214794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4f300e3ad07c547861089ce7a3e04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _settings:
-  - {fileID: 11400000, guid: 1bbc9bf0b1d82634c8964017ab7204e3, type: 2}
-  - {fileID: 11400000, guid: 7fa7d9e9938304b49892bc1eb4f7bb4e, type: 2}
-  - {fileID: 11400000, guid: e07471a56a5a03445bc985f3dc90dfbb, type: 2}
-  - {fileID: 11400000, guid: 6f24241181401b54fb88b5868897b530, type: 2}
-  - {fileID: 11400000, guid: c0f16dab32362fc44b7368b7f64b2856, type: 2}
 --- !u!114 &967214800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +818,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603f029466bfd2c409716e819c4eaaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings:
+  - {fileID: 11400000, guid: 1bbc9bf0b1d82634c8964017ab7204e3, type: 2}
+  - {fileID: 11400000, guid: 7fa7d9e9938304b49892bc1eb4f7bb4e, type: 2}
+  - {fileID: 11400000, guid: e07471a56a5a03445bc985f3dc90dfbb, type: 2}
+  - {fileID: 11400000, guid: 6f24241181401b54fb88b5868897b530, type: 2}
+  - {fileID: 11400000, guid: c0f16dab32362fc44b7368b7f64b2856, type: 2}
 --- !u!1001 &2288501137470432215
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,16 +3,19 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ResourcePresenter : MonoBehaviour
+public class ResourcePresenter : IInitializable
 {
-    [SerializeField] private List<BaseResourceSettings> _settings;
-
-    private readonly List<BaseResource> resources = new List<BaseResource>();
-
-    [Inject]
+    private readonly List<BaseResourceSettings> _settings;
+    private readonly List<BaseResource> resources = new();
     private readonly DiContainer _container;
 
-    private void Awake()
+    public ResourcePresenter(List<BaseResourceSettings> settings, DiContainer diContainer)
+    {
+        _settings = settings;
+        _container = diContainer;
+    }
+
+    public void Initialize()
     {
         foreach (var item in _settings)
         {
