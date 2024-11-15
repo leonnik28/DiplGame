@@ -33,7 +33,6 @@ public class ResourcePresenter : IInitializable
             GameObject spawnObject = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
             var resourceObject = spawnObject.AddComponent<ResourceObject>();
             resourceObject.Instantiate(targetResource);
-            _container.Inject(resourceObject);
         }
     }
 }

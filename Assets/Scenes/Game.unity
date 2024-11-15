@@ -584,7 +584,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68c238e363be525449a174d120491c9b, type: 2}
   _startingChunk: {fileID: 1915537721}
   _seed: 1234
-  _mobAssetReference: {fileID: 2289811882078314816, guid: 8495add9e159f884a907a53f45ea0711, type: 3}
+  _mobPrefab: {fileID: 2289811882078314816, guid: 8495add9e159f884a907a53f45ea0711, type: 3}
   _meshSurface: {fileID: 1682839456}
 --- !u!114 &967214800
 MonoBehaviour:
