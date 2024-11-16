@@ -40,13 +40,18 @@ public class Player : MonoBehaviour, IDamageble
         _movement.Move(_inputVector, _animator.transform);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _attack.Attack(_animator.transform);
+            Attack();
         }
     }
 
     private void OnDisable()
     {
         _gameSession.OnDataChange -= UpdateData;
+    }
+
+    public void Attack()
+    {
+        _attack.Attack(_animator.transform);
     }
 
     public async void TakeDamage(int damage)

@@ -17,10 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 2931147886682674ebbb2c72a55c6a0c
   m_SerializeEntries:
-  - m_GUID: c717f817a496cf247a92b830b355a407
-    m_Address: Assets/Prefabs/Bee/MainBee.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: c9c34bc83203a304d9cc200f5ae261ad
     m_Address: Assets/Prefabs/GameResources/axe.prefab
     m_ReadOnly: 0
