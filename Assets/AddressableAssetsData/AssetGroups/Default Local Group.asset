@@ -57,6 +57,10 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Chunks/Chunk2.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 9ade337e5e1c85e4ea1be4e58d35a24e
+    m_Address: Assets/Prefabs/View/PlayUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 219cb012acf75664ea38f11a3bd28eb5, type: 2}
   m_SchemaSet:

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAttack : BaseAttack
 {
     private float _lastAttackTime = 0f;
+    private bool _stop = false;
 
     public EnemyAttack(AttackSettings attackSettings, Animator animator) : base(attackSettings, animator) { }
 
@@ -14,16 +15,24 @@ public class EnemyAttack : BaseAttack
         {
             _lastAttackTime = Time.time;
             await DelayAttack();
-            _animator.SetTrigger("attack");
-            Collider[] hitPlayer = Physics.OverlapSphere(transform.position, _attackSettings.Range);
-            foreach (Collider hit in hitPlayer)
+            if (!_stop)
             {
-                if (hit.TryGetComponent<Player>(out Player player) && IsInCone(hit.transform.position, transform))
+                _animator.SetTrigger("attack");
+                Collider[] hitPlayer = Physics.OverlapSphere(transform.position, _attackSettings.Range);
+                foreach (Collider hit in hitPlayer)
                 {
-                    player.TakeDamage(_attackSettings.Damage);
+                    if (hit.TryGetComponent<Player>(out Player player) && IsInCone(hit.transform.position, transform))
+                    {
+                        player.TakeDamage(_attackSettings.Damage);
+                    }
                 }
             }
         }
+    }
+
+    public void StopAttack()
+    {
+        _stop = true;
     }
 
     private async UniTask DelayAttack()

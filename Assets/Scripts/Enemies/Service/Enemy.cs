@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour, IDamageble
     private void Die()
     {
         _movement.DestroyMovement();
+        _attack.StopAttack();
         _animator.SetTrigger("die");
         Collider collider = transform.GetComponent<Collider>();
         collider.enabled = false;
