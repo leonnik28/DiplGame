@@ -5,12 +5,9 @@ using Zenject;
 
 public class ChunksPlacer : MonoBehaviour
 {
-    [Header("Properties")]
-    [SerializeField] private int _roomCount;
-    [SerializeField] private List<ChunkSettings> _chunkSettings;
-    [SerializeField] private Chunk _startingChunk;
-    [SerializeField] private int _seed;
+    [SerializeField] private MapSettings _mapSettings;
 
+    [SerializeField] private Chunk _startingChunk;
     [SerializeField] private GameObject _mobPrefab;
     [SerializeField] private NavMeshSurface _meshSurface;
 
@@ -29,14 +26,14 @@ public class ChunksPlacer : MonoBehaviour
     private void Start()
     {
         _meshSurface.BuildNavMesh();
-        _random = new System.Random(_seed);
+        _random = new System.Random(_mapSettings.Seed);
 
         _spawnedChunks = new Dictionary<Vector2Int, Chunk>();
         _spawnedChunks[Vector2Int.zero] = _startingChunk;
 
         int placedChunks = 1;
 
-        while (placedChunks < _roomCount)
+        while (placedChunks < _mapSettings.RoomCount)
         {
             Vector2Int position = GetRandomPosition();
             if (!_spawnedChunks.ContainsKey(position))
@@ -50,20 +47,18 @@ public class ChunksPlacer : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log($"Placed {placedChunks} chunks out of {_roomCount} requested.");
     }
 
     private Vector2Int GetRandomPosition()
     {
-        int x = _random.Next(-_roomCount, _roomCount);
-        int y = _random.Next(-_roomCount, _roomCount);
+        int x = _random.Next(-_mapSettings.RoomCount, _mapSettings.RoomCount);
+        int y = _random.Next(-_mapSettings.RoomCount, _mapSettings.RoomCount);
         return new Vector2Int(x, y);
     }
 
     private bool CanPlaceChunk(Vector2Int position)
     {
-        ChunkSettings chunkSettings = _chunkSettings[_random.Next(_chunkSettings.Count)];
+        ChunkSettings chunkSettings = _mapSettings.ChunkSettings[_random.Next(_mapSettings.ChunkSettings.Count)];
         Chunk newChunk = chunkSettings.ChunkPrefab.GetComponent<Chunk>();
 
         List<Vector2Int> neighbours = new List<Vector2Int>();
@@ -78,7 +73,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private bool PlaceOneChunk(Vector2Int position)
     {
-        ChunkSettings chunkSettings = _chunkSettings[_random.Next(_chunkSettings.Count)];
+        ChunkSettings chunkSettings = _mapSettings.ChunkSettings[_random.Next(_mapSettings.ChunkSettings.Count)];
         Vector3 chunkPosition = new Vector3(position.x * chunkSettings.ChunkPrefab.GetComponent<Chunk>().Size.x, 0, position.y * chunkSettings.ChunkPrefab.GetComponent<Chunk>().Size.y);
         GameObject chunkObject = _chunkFactory.Create(chunkSettings, chunkPosition);
         _meshSurface.BuildNavMesh();

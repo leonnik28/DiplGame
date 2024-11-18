@@ -1,12 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class PlayNextScene : MonoBehaviour
 {
     [SerializeField] private Button _playButton;
 
-    private const string SCENE_NAME = "Game";
+    private MapDataConfigurator _configurator;
+
+    private const string SCENE_NAME = "LoadingMainToGame";
+
+    [Inject]
+    private void Construct(MapDataConfigurator mapDataConfigurator)
+    {
+        _configurator = mapDataConfigurator;
+    }
 
     private void OnEnable()
     {
@@ -20,6 +29,7 @@ public class PlayNextScene : MonoBehaviour
 
     private void PlayScene()
     {
-        SceneManager.LoadScene(SCENE_NAME);
+        _configurator.ConfigureMapData();
+        SceneManager.LoadSceneAsync(SCENE_NAME);
     }
 }

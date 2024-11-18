@@ -578,12 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f016b0dcff9c042a2085910d18fa02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomCount: 50
-  _chunkSettings:
-  - {fileID: 11400000, guid: 1480deb5ecfab4d499a24f99511249a8, type: 2}
-  - {fileID: 11400000, guid: 68c238e363be525449a174d120491c9b, type: 2}
+  _mapSettings: {fileID: 11400000, guid: d6a23e657cfbc8e49a87f8ca265cf7e4, type: 2}
   _startingChunk: {fileID: 1915537721}
-  _seed: 1234
   _mobPrefab: {fileID: 2289811882078314816, guid: 8495add9e159f884a907a53f45ea0711, type: 3}
   _meshSurface: {fileID: 1682839456}
 --- !u!114 &967214800
