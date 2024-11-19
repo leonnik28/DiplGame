@@ -10,6 +10,7 @@ public class UITriggerHandler : MonoBehaviour
 
     private GameObject _instantiatedObject;
     private DiContainer _container;
+    private AsyncOperationHandle<GameObject> _preloadedHandle;
 
     [Inject]
     private void Construct(DiContainer container)
@@ -17,11 +18,32 @@ public class UITriggerHandler : MonoBehaviour
         _container = container;
     }
 
+    private void Awake()
+    {
+        PreloadAsset();
+    }
+
+    private void OnDestroy()
+    {
+        if (_preloadedHandle.IsValid())
+        {
+            Addressables.Release(_preloadedHandle);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Player>(out Player player))
         {
-            _uiReference.InstantiateAsync().Completed += OnInstantiateCompleted;
+            if (_preloadedHandle.IsDone)
+            {
+                _instantiatedObject = Instantiate(_preloadedHandle.Result);
+                _container.Inject(_instantiatedObject.GetComponent<PlayNextScene>());
+            }
+            else
+            {
+                Debug.LogError("UI asset is not preloaded yet.");
+            }
         }
     }
 
@@ -37,16 +59,8 @@ public class UITriggerHandler : MonoBehaviour
         }
     }
 
-    private void OnInstantiateCompleted(AsyncOperationHandle<GameObject> handle)
+    private void PreloadAsset()
     {
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            _instantiatedObject = handle.Result;
-            _container.Inject(_instantiatedObject.GetComponent<PlayNextScene>());
-        }
-        else
-        {
-            Debug.LogError("Failed to instantiate UI object.");
-        }
+        _preloadedHandle = _uiReference.LoadAssetAsync<GameObject>();
     }
 }

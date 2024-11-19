@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using UniRx;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -40,5 +41,24 @@ public class LoadingScreen : MonoBehaviour
         _progressText.text = "100%";
 
         _asyncOperation.allowSceneActivation = true;
+    }
+
+    private void StartLoading() // True Loading UniRx
+    {
+        SceneManager.LoadSceneAsync(LOAD_SCENE_NAME)
+            .AsAsyncOperationObservable()
+            .ObserveOnMainThread()
+            .Do(progressOperation =>
+            {
+                float progress = Mathf.Clamp01(progressOperation.progress / 0.9f);
+                _loadingBar.value = progress;
+                _progressText.text = (progress * 100f).ToString("F0") + "%";
+            })
+            .Subscribe(_ =>
+            {
+                _loadingBar.value = 1f;
+                _progressText.text = "100%";
+            })
+            .AddTo(this);
     }
 }
