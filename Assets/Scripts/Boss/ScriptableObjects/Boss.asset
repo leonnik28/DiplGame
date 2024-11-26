@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7f8e8b8a2db1f4ba11a896a1e3b383, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  _meleeAttackSettings: {fileID: 0}
-  _rangedAttackSettings: {fileID: 0}
+  _meleeAttackSettings: {fileID: 11400000, guid: 994ea26c892ddec4daae505d0855b37d, type: 2}
+  _rangedAttackSettings: {fileID: 11400000, guid: 11a3059b9f71b2747a540d36e1674a42, type: 2}
   _catapultObject: {fileID: 0}
   _directBulletObject: {fileID: 0}
+  _movementSettings: {fileID: 11400000, guid: f8c5e3a9347d9c845a3dfbdfa2a80854, type: 2}
+  _resources: []
   _moveSpeed: 5
   _rotationSpeed: 5
-  _health: 0
-  _projectileSpeed: 0
+  _health: 10
+  _projectileSpeed: 1

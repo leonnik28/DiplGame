@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageble
 {
     [SerializeField] private BossSettings _settings;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Collider _triggerCollider;
 
     private BossMeleeAttack _meleeAttack;
     private BossRangedAttack _rangedAttack;
+
+    private BossMovement _movement;
 
     private Player _player;
 
@@ -30,5 +31,59 @@ public class Boss : MonoBehaviour
 
         _meleeAttack = new BossMeleeAttack(_settings.MeleeAttackSettings, _animator);
         _rangedAttack = new BossRangedAttack(_settings.RangedAttackSettings, _animator, transform, _settings.ProjectileSpeed);
+        _movement = new BossMovement(_animator, _settings.MovementSettings, GetComponent<NavMeshAgent>(), _player);
+
+        _movement.Initialize();
+        _movement.OnAttack += Attack;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInChildren<Player>())
+        {
+            _ = _movement.StartMove();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponentInChildren<Player>())
+        {
+            _movement.ReturnToInitialPosition();
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        _animator.SetTrigger("takeDamage");
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Attack()
+    {
+        _meleeAttack.Attack(transform);
+    }
+
+    private void Die()
+    {
+        _movement.DestroyMovement();
+        _meleeAttack.StopAttack();
+        _animator.SetTrigger("die");
+        Collider collider = transform.GetComponent<Collider>();
+        collider.enabled = false;
+        _triggerCollider.enabled = false;
+
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 1;
+        foreach (BaseResourceSettings resource in _settings.Resources)
+        {
+            _presenter.SpawnItem(spawnPosition, resource);
+        }
+        _movement = null;
+        _meleeAttack = null;
     }
 }
