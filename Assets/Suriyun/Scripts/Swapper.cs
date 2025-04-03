@@ -4,12 +4,12 @@ using System.Collections;
     public class Swapper : MonoBehaviour
     {
 
-        public GameObject[] character;
+        public UnityEngine.GameObject[] character;
         public int index;
         public Texture btn_tex;
         void Awake()
         {
-            foreach (GameObject c in character)
+            foreach (UnityEngine.GameObject c in character)
             {
                 c.SetActive(false);
             }

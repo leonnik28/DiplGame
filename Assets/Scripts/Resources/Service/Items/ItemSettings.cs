@@ -9,7 +9,7 @@ public class ItemSettings : BaseResourceSettings
     public MoneySettings Price;
     public int Level;
 
-    public override GameObject SpawnObject { get => _spawnObject; protected set => _spawnObject = value; }
+    public override UnityEngine.GameObject SpawnObject { get => _spawnObject; protected set => _spawnObject = value; }
 
     [SerializeField] private Type _type;
 

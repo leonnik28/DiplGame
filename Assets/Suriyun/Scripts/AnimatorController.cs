@@ -8,7 +8,7 @@ using System;
 
         public Animator[] animators;
 
-        public void SwapVisibility(GameObject obj)
+        public void SwapVisibility(UnityEngine.GameObject obj)
         {
             obj.SetActive(!obj.activeSelf);
         }

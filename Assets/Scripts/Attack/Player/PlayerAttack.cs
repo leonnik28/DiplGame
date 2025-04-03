@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class PlayerAttack : BaseAttack
 {
-    private float _lastAttackTime = 0f;
-
     public PlayerAttack(AttackSettings attackSettings, Animator animator) : base(attackSettings, animator) { }
 
     public override void Attack(Transform transform)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
             _animator.SetTrigger("attack");

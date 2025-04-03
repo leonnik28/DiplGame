@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeAttackSettings: {fileID: 11400000, guid: 994ea26c892ddec4daae505d0855b37d, type: 2}
   _rangedAttackSettings: {fileID: 11400000, guid: 11a3059b9f71b2747a540d36e1674a42, type: 2}
+  _spawnAttackSettings: {fileID: 11400000, guid: 365366c6aa5d5de48bb0292f5c97b6f6, type: 2}
   _catapultObject: {fileID: 0}
   _directBulletObject: {fileID: 0}
   _movementSettings: {fileID: 11400000, guid: f8c5e3a9347d9c845a3dfbdfa2a80854, type: 2}
   _resources: []
+  _spawnedMobs:
+  - {fileID: 2289811882078314816, guid: 8495add9e159f884a907a53f45ea0711, type: 3}
   _moveSpeed: 5
   _rotationSpeed: 5
   _health: 10

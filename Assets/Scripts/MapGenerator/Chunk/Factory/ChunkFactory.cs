@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ChunkFactory : IFactory<ChunkSettings, Vector3, GameObject>
+public class ChunkFactory : IFactory<ChunkSettings, Vector3, UnityEngine.GameObject>
 {
     private readonly DiContainer _container;
 
@@ -10,9 +10,9 @@ public class ChunkFactory : IFactory<ChunkSettings, Vector3, GameObject>
         _container = container;
     }
 
-    public GameObject Create(ChunkSettings chunkSettings, Vector3 position)
+    public UnityEngine.GameObject Create(ChunkSettings chunkSettings, Vector3 position)
     {
-        GameObject chunk = _container.InstantiatePrefab(chunkSettings.ChunkPrefab, position, Quaternion.identity, null);
+        UnityEngine.GameObject chunk = _container.InstantiatePrefab(chunkSettings.ChunkPrefab, position, Quaternion.identity, null);
         return chunk;
     }
 }

@@ -8,9 +8,9 @@ public class UITriggerHandler : MonoBehaviour
 {
     [SerializeField] private AssetReference _uiReference;
 
-    private GameObject _instantiatedObject;
+    private UnityEngine.GameObject _instantiatedObject;
     private DiContainer _container;
-    private AsyncOperationHandle<GameObject> _preloadedHandle;
+    private AsyncOperationHandle<UnityEngine.GameObject> _preloadedHandle;
 
     [Inject]
     private void Construct(DiContainer container)
@@ -61,6 +61,6 @@ public class UITriggerHandler : MonoBehaviour
 
     private void PreloadAsset()
     {
-        _preloadedHandle = _uiReference.LoadAssetAsync<GameObject>();
+        _preloadedHandle = _uiReference.LoadAssetAsync<UnityEngine.GameObject>();
     }
 }

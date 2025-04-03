@@ -20,14 +20,14 @@ public class ThirdPersonCamera : MonoBehaviour
 	
 	void Start()
 	{
-		// 各参照の初期化
-		standardPos = GameObject.Find ("CamPos").transform;
+        // 各参照の初期化
+        standardPos = UnityEngine.GameObject.Find ("CamPos").transform;
 		
-		if(GameObject.Find ("FrontPos"))
-			frontPos = GameObject.Find ("FrontPos").transform;
+		if(UnityEngine.GameObject.Find ("FrontPos"))
+            frontPos = UnityEngine.GameObject.Find ("FrontPos").transform;
 		
-		if(GameObject.Find ("JumpPos"))
-			jumpPos = GameObject.Find ("JumpPos").transform;
+		if(UnityEngine.GameObject.Find ("JumpPos"))
+            jumpPos = UnityEngine.GameObject.Find ("JumpPos").transform;
 		
 		//カメラをスタートする
 		transform.position = standardPos.position;	

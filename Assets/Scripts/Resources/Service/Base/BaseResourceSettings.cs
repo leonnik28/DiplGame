@@ -4,6 +4,6 @@ public abstract class BaseResourceSettings : ScriptableObject
 {
     public abstract System.Type ResourceType { get; }
 
-    public virtual GameObject SpawnObject { get; protected set; }
-    [SerializeField] protected GameObject _spawnObject;
+    public virtual UnityEngine.GameObject SpawnObject { get; protected set; }
+    [SerializeField] protected UnityEngine.GameObject _spawnObject;
 }

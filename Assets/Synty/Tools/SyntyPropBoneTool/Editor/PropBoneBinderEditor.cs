@@ -187,7 +187,7 @@ namespace Synty.Tools.SyntyPropBoneTool
             List<PropBoneBinder> binders = new List<PropBoneBinder>();
             for (int i = 0; i < Selection.objects.Length; ++i)
             {
-                if (Selection.objects[i] is GameObject)
+                if (Selection.objects[i] is UnityEngine.GameObject)
                 {
                     if (PrefabUtility.IsPartOfPrefabAsset(Selection.objects[i]))
                     {
@@ -195,7 +195,7 @@ namespace Synty.Tools.SyntyPropBoneTool
                         continue;
                     }
 
-                    GameObject gameObject = Selection.objects[i] as GameObject;
+                    UnityEngine.GameObject gameObject = Selection.objects[i] as UnityEngine.GameObject;
                     Animator animator = gameObject.GetComponent<Animator>();
                     if (animator != null)
                     {

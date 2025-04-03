@@ -30,7 +30,7 @@ public class ResourcePresenter : IInitializable
 
         if (targetResource != null)
         {
-            GameObject spawnObject = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
+            UnityEngine.GameObject spawnObject = targetResource.Spawn(targetResource.Settings.SpawnObject, position);
             var resourceObject = spawnObject.AddComponent<ResourceObject>();
             resourceObject.Instantiate(targetResource);
         }

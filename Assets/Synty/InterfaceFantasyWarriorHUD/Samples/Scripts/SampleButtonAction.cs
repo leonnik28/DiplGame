@@ -19,8 +19,8 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
     {
         [Header("References")]
         public Button button;
-        public List<GameObject> toggleObjects;
-        public GameObject activateObject;
+        public List<UnityEngine.GameObject> toggleObjects;
+        public UnityEngine.GameObject activateObject;
 
         [Header("Parameters")]
         public List<SampleAnimatorActionData> animatorActions;
@@ -60,7 +60,7 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
         {
             StartCoroutine(C_ActivateObject());
 
-            foreach (GameObject toggleObject in toggleObjects)
+            foreach (UnityEngine.GameObject toggleObject in toggleObjects)
             {
                 toggleObject.SetActive(!toggleObject.activeSelf);
             }

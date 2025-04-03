@@ -29,7 +29,7 @@ using System.Collections;
         private Vector3 orgVectColCenter;
         private Animator anim;
         private AnimatorStateInfo currentBaseState;
-        private GameObject cameraObject;
+        private UnityEngine.GameObject cameraObject;
 
 
         static int idle_cState = Animator.StringToHash("Base Layer.Idle_C");
@@ -47,7 +47,7 @@ using System.Collections;
             anim = GetComponent<Animator>();
             col = GetComponent<CapsuleCollider>();
             rb = GetComponent<Rigidbody>();
-            cameraObject = GameObject.FindWithTag("MainCamera");
+        cameraObject = UnityEngine.GameObject.FindWithTag("MainCamera");
             orgColHight = col.height;
             orgVectColCenter = col.center;
         }

@@ -7,7 +7,7 @@ public class MoneySettings : BaseResourceSettings
 
     public Type MoneyType { get => _type; set => _type = value; }
     public int Count { get => _count; set => _count = value; }
-    public override GameObject SpawnObject { get => _spawnObject; protected set => _spawnObject = value; }
+    public override UnityEngine.GameObject SpawnObject { get => _spawnObject; protected set => _spawnObject = value; }
 
     [SerializeField] private Type _type;
 

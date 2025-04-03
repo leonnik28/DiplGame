@@ -3,16 +3,16 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     public Vector2 Size => _size;
-    public GameObject DoorUp => _doorUp;
-    public GameObject DoorDown => _doorDown;
-    public GameObject DoorRight => _doorRight;
-    public GameObject DoorLeft => _doorLeft;
+    public UnityEngine.GameObject DoorUp => _doorUp;
+    public UnityEngine.GameObject DoorDown => _doorDown;
+    public UnityEngine.GameObject DoorRight => _doorRight;
+    public UnityEngine.GameObject DoorLeft => _doorLeft;
 
     [SerializeField] private Vector2 _size;
-    [SerializeField] private GameObject _doorUp;
-    [SerializeField] private GameObject _doorDown;
-    [SerializeField] private GameObject _doorRight;
-    [SerializeField] private GameObject _doorLeft;
+    [SerializeField] private UnityEngine.GameObject _doorUp;
+    [SerializeField] private UnityEngine.GameObject _doorDown;
+    [SerializeField] private UnityEngine.GameObject _doorRight;
+    [SerializeField] private UnityEngine.GameObject _doorLeft;
 
     public void RotateRandomly(System.Random random)
     {
@@ -28,7 +28,7 @@ public class Chunk : MonoBehaviour
     {
         transform.Rotate(0, 90, 0);
 
-        GameObject tmp = _doorLeft;
+        UnityEngine.GameObject tmp = _doorLeft;
         _doorLeft = _doorDown;
         _doorDown = _doorRight;
         _doorRight = _doorUp;

@@ -8,7 +8,7 @@ public class ChunksPlacer : MonoBehaviour
     [SerializeField] private MapSettings _mapSettings;
 
     [SerializeField] private Chunk _startingChunk;
-    [SerializeField] private GameObject _mobPrefab;
+    [SerializeField] private UnityEngine.GameObject _mobPrefab;
     [SerializeField] private NavMeshSurface _meshSurface;
 
     private Dictionary<Vector2Int, Chunk> _spawnedChunks;
@@ -75,9 +75,9 @@ public class ChunksPlacer : MonoBehaviour
     {
         ChunkSettings chunkSettings = _mapSettings.ChunkSettings[_random.Next(_mapSettings.ChunkSettings.Count)];
         Vector3 chunkPosition = new Vector3(position.x * chunkSettings.ChunkPrefab.GetComponent<Chunk>().Size.x, 0, position.y * chunkSettings.ChunkPrefab.GetComponent<Chunk>().Size.y);
-        GameObject chunkObject = _chunkFactory.Create(chunkSettings, chunkPosition);
+        UnityEngine.GameObject chunkObject = _chunkFactory.Create(chunkSettings, chunkPosition);
         _meshSurface.BuildNavMesh();
-        GameObject mobObject = _mobFactory.Create(_mobPrefab, chunkPosition + chunkSettings.MobPosition);
+        UnityEngine.GameObject mobObject = _mobFactory.Create(_mobPrefab, chunkPosition + chunkSettings.MobPosition);
         Chunk newChunk = chunkObject.GetComponent<Chunk>();
         newChunk.RotateRandomly(_random);
 

@@ -19,9 +19,9 @@ public abstract class BaseResource
         _bag = bag;
     }
 
-    public virtual GameObject Spawn(GameObject gameObject, Vector3 position)
+    public virtual UnityEngine.GameObject Spawn(UnityEngine.GameObject gameObject, Vector3 position)
     {
-        GameObject spawnObject = _resourceFactory.Create(gameObject, position, Quaternion.identity);
+        UnityEngine.GameObject spawnObject = _resourceFactory.Create(gameObject, position, Quaternion.identity);
         DestroyAfterDelay(spawnObject).Forget();
         return spawnObject;
     }
@@ -31,15 +31,15 @@ public abstract class BaseResource
         _bag.GetResource(this);
     }
 
-    protected virtual void Destroy(GameObject spawnObject)
+    protected virtual void Destroy(UnityEngine.GameObject spawnObject)
     {
         if (spawnObject)
         {
-            GameObject.Destroy(spawnObject);
+            UnityEngine.GameObject.Destroy(spawnObject);
         }
     }
 
-    private async UniTaskVoid DestroyAfterDelay(GameObject spawnObject)
+    private async UniTaskVoid DestroyAfterDelay(UnityEngine.GameObject spawnObject)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(_timeToDestroy));
         Destroy(spawnObject);

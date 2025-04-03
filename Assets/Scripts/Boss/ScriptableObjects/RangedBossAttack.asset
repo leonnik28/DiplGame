@@ -15,4 +15,4 @@ MonoBehaviour:
   _damage: 0
   _range: 0
   _angle: 0
-  _cooldownTime: 0
+  _cooldownTime: 5

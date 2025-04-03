@@ -332,7 +332,7 @@ namespace Synty.Tools.SyntyPropBoneTool
         /// <param name="editScope">The root game object to create the prop bone under.</param>
         /// <param name="boneDefinition">The definition of the prop bone to be created.</param>
         /// <param name="boneInstance">The prop bone binding to update.</param>
-        private void CreatePropBones(GameObject editScope, PropBoneDefinition boneDefinition)
+        private void CreatePropBones(UnityEngine.GameObject editScope, PropBoneDefinition boneDefinition)
         {
             Transform parent = TransformUtil.SearchHierarchy(editScope.transform, boneDefinition.parentBoneName);
             if (parent == null)
@@ -379,7 +379,7 @@ namespace Synty.Tools.SyntyPropBoneTool
         private Transform CreatePropBone(string name, Transform parent)
         {
             // does not check if there is already a bone called this. we should check before calling create
-            Transform boneInstance = new GameObject(name).transform;
+            Transform boneInstance = new UnityEngine.GameObject(name).transform;
             boneInstance.SetParent(parent);
             if (boneInstance.parent != parent)
             {
@@ -414,7 +414,7 @@ namespace Synty.Tools.SyntyPropBoneTool
         ///     Destroys all the prop bones that have been created by the PropBoneBinder and clears all bindings
         /// </summary>
         /// <param name="editScope">The root game objects to destroy prop bones from.</param>
-        private void DestroyPropBones(GameObject editScope)
+        private void DestroyPropBones(UnityEngine.GameObject editScope)
         {
             _propBoneBindings.Clear();
             PropBone[] bones = editScope.GetComponentsInChildren<PropBone>();
@@ -457,7 +457,7 @@ namespace Synty.Tools.SyntyPropBoneTool
                 }
                 else
                 {
-                    GameObject gameObject = bones[i].gameObject;
+                    UnityEngine.GameObject gameObject = bones[i].gameObject;
                     // Remove the component but don't destroy the object.
                     if (Application.isEditor && !Application.isPlaying)
                     {

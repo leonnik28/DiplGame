@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class Enemy : MonoBehaviour, IDamageble
+public class GameObject : MonoBehaviour, IDamageble
 {
     [SerializeField] private EnemySettings _settings;
     [SerializeField] private Animator _animator;

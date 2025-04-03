@@ -17,8 +17,7 @@ MonoBehaviour:
   _returnToPositionRadius: 10
   _checkInterval: 0.2
   _rotationSpeed: 3
-  _summonRadius: 1
-  _lifeDrainRadius: 3
+  _rangeAttackRadius: 5
   _dodgeDistance: 2
   _summonProbability: 50
-  _lifeDrainProbability: 5
+  _lifeDrainProbability: 1

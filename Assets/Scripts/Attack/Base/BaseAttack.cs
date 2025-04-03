@@ -5,6 +5,8 @@ public abstract class BaseAttack
     [SerializeField] protected AttackSettings _attackSettings;
     [SerializeField] protected Animator _animator;
 
+    protected float _lastAttackTime = 0f;
+
     public BaseAttack(AttackSettings attackSettings, Animator animator)
     {
         _attackSettings = attackSettings;
@@ -12,6 +14,16 @@ public abstract class BaseAttack
     }
 
     public virtual void Attack(Transform transform) { }
+
+    public bool IsCooldown()
+    {
+        return Time.time - _lastAttackTime < _attackSettings.CooldownTime;
+    }
+
+    public float CooldownTime()
+    {
+        return _attackSettings.CooldownTime - (Time.time - _lastAttackTime);
+    }
 
     protected bool IsInCone(Vector3 targetPosition, Transform transform)
     {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossMeleeAttack : BaseAttack
 {
-    private float _lastAttackTime = 0f;
     private readonly float _damageCoefficient = 2f;
     private readonly float _rangeCoefficient = 1.5f;
     private bool _stop = false;
@@ -13,10 +12,9 @@ public class BossMeleeAttack : BaseAttack
 
     public override async void Attack(Transform transform)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
-            await DelayAttack();
             if (!_stop)
             {
                 _animator.SetTrigger("attack");
@@ -34,10 +32,9 @@ public class BossMeleeAttack : BaseAttack
 
     public async void AreaAttack(Transform transform)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
-            await DelayAttack();
             if (!_stop)
             {
                 _animator.SetTrigger("areaAttack");
@@ -55,11 +52,9 @@ public class BossMeleeAttack : BaseAttack
 
     public async void ChargedAttack(Transform transform)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
-            _animator.SetTrigger("charge");
-            await UniTask.Delay(TimeSpan.FromSeconds(2));
             if (!_stop)
             {
                 _animator.SetTrigger("chargedAttack");

@@ -16,9 +16,9 @@ namespace Synty.Tools.SyntyPropBoneTool
     public class PropBoneConfig : ScriptableObject
     {
         [Tooltip("The rig used to create the animations. Rig must be in T Pose.")]
-        public GameObject sourceRig;
+        public UnityEngine.GameObject sourceRig;
         [Tooltip("The rig to play the animations on in Unity. Rig must be in T Pose.")]
-        public GameObject targetRig;
+        public UnityEngine.GameObject targetRig;
         [Tooltip("Parameters that define where prop bones will generate and how to constrain them")]
         public PropBoneDefinition[] propBoneDefinitions;
 

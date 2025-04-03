@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ResourceFactory : IFactory<GameObject, Vector3, Quaternion, GameObject>
+public class ResourceFactory : IFactory<UnityEngine.GameObject, Vector3, Quaternion, UnityEngine.GameObject>
 {
     private readonly DiContainer _container;
 
@@ -10,9 +10,9 @@ public class ResourceFactory : IFactory<GameObject, Vector3, Quaternion, GameObj
         _container = container;
     }
 
-    public GameObject Create(GameObject prefab, Vector3 position, Quaternion rotation)
+    public UnityEngine.GameObject Create(UnityEngine.GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        GameObject resource = _container.InstantiatePrefab(prefab, position, rotation, null);
+        UnityEngine.GameObject resource = _container.InstantiatePrefab(prefab, position, rotation, null);
         return resource;
     }
 }

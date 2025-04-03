@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyAttack : BaseAttack
 {
-    private float _lastAttackTime = 0f;
     private bool _stop = false;
 
     public EnemyAttack(AttackSettings attackSettings, Animator animator) : base(attackSettings, animator) { }
 
     public override async void Attack(Transform transform)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
             await DelayAttack();

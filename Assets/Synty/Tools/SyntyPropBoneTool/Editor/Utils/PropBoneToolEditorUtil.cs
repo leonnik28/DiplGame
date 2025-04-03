@@ -145,7 +145,7 @@ namespace Synty.Tools.SyntyPropBoneTool
         /// <param name="sourceRig">The source rig to match when finding the PropBoneConfig.</param>
         /// <param name="targetRig">The target rig to match when finding the PropBoneConfig.</param>
         /// <returns>A <c>PropBoneConfig</c> that matches the sourceRig and targetRig or returns the default PropBoneConfig if a match is not found.</returns>
-        public static PropBoneConfig FindFirstMatchingConfig(GameObject sourceRig, GameObject targetRig)
+        public static PropBoneConfig FindFirstMatchingConfig(UnityEngine.GameObject sourceRig, UnityEngine.GameObject targetRig)
         {
             string[] guids = AssetDatabase.FindAssets("t:PropBoneConfig");
             for (int i = 0; i < guids.Length; ++i)
@@ -181,7 +181,7 @@ namespace Synty.Tools.SyntyPropBoneTool
 
                 if (binders[i].propBoneConfig == null)
                 {
-                    GameObject targetRig = null;
+                    UnityEngine.GameObject targetRig = null;
                     if (binders[i].animator != null)
                     {
                         targetRig = binders[i].animator.gameObject;
@@ -192,7 +192,7 @@ namespace Synty.Tools.SyntyPropBoneTool
                         string path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(targetRig);
                         if (path != null)
                         {
-                            targetRig = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                            targetRig = AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(path);
                         }
                     }
                     else if (PrefabStageUtility.GetCurrentPrefabStage() != null)
@@ -200,7 +200,7 @@ namespace Synty.Tools.SyntyPropBoneTool
                         string path = PrefabStageUtility.GetCurrentPrefabStage().assetPath;
                         if (path != null)
                         {
-                            targetRig = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                            targetRig = AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(path);
                         }
                     }
 

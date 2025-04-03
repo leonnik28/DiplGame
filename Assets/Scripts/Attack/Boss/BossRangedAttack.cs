@@ -4,7 +4,6 @@ using System;
 
 public class BossRangedAttack : BaseAttack
 {
-    private float _lastAttackTime = 0f;
     private bool _stop = false;
 
     private readonly Transform _bossPosition;
@@ -18,11 +17,10 @@ public class BossRangedAttack : BaseAttack
 
     public override async void Attack(Transform target)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
-            _animator.SetTrigger("pistolAttack");
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            _animator.SetTrigger("rangeAttack");
             if (!_stop)
             {
                 Vector3 targetPosition = target.position;
@@ -40,9 +38,9 @@ public class BossRangedAttack : BaseAttack
         }
     }
 
-    public async void CatapultAttack(Transform target, GameObject catapultObject , bool multipleAttack)
+    public async void CatapultAttack(Transform target, UnityEngine.GameObject catapultObject , bool multipleAttack)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
             _animator.SetTrigger("catapultAttack");
@@ -56,7 +54,7 @@ public class BossRangedAttack : BaseAttack
                 else
                 {
                     Vector3 launchDirection = (target.position - _bossPosition.position).normalized;
-                    GameObject projectile = GameObject.Instantiate(catapultObject, _bossPosition.position, Quaternion.identity);
+                    UnityEngine.GameObject projectile = UnityEngine.GameObject.Instantiate(catapultObject, _bossPosition.position, Quaternion.identity);
                     Rigidbody rb = projectile.GetComponent<Rigidbody>();
                     rb.velocity = launchDirection * _projectileSpeed + Vector3.up * _projectileSpeed;
                     await CheckForImpact(projectile);
@@ -65,9 +63,9 @@ public class BossRangedAttack : BaseAttack
         }
     }
 
-    public async void DirectProjectileAttack(Transform target, GameObject bulletObject , bool multipleAttack)
+    public async void DirectProjectileAttack(Transform target, UnityEngine.GameObject bulletObject , bool multipleAttack)
     {
-        if (Time.time - _lastAttackTime >= _attackSettings.CooldownTime)
+        if (!IsCooldown())
         {
             _lastAttackTime = Time.time;
             _animator.SetTrigger("directAttack");
@@ -81,7 +79,7 @@ public class BossRangedAttack : BaseAttack
                 else
                 {
                     Vector3 launchDirection = (target.position - _bossPosition.position).normalized;
-                    GameObject projectile = GameObject.Instantiate(bulletObject, _bossPosition.position, Quaternion.identity);
+                    UnityEngine.GameObject projectile = UnityEngine.GameObject.Instantiate(bulletObject, _bossPosition.position, Quaternion.identity);
                     Rigidbody rb = projectile.GetComponent<Rigidbody>();
                     rb.velocity = launchDirection * _projectileSpeed;
                     await CheckForImpact(projectile);
@@ -100,12 +98,12 @@ public class BossRangedAttack : BaseAttack
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
     }
 
-    private async UniTask CheckForImpact(GameObject projectile)
+    private async UniTask CheckForImpact(UnityEngine.GameObject projectile)
     {
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         await UniTask.WaitUntil(() => rb.velocity.magnitude < 0.1f);
         Explode(projectile.transform.position);
-        GameObject.Destroy(projectile);
+        UnityEngine.GameObject.Destroy(projectile);
     }
 
     private void Explode(Vector3 position)
@@ -120,14 +118,14 @@ public class BossRangedAttack : BaseAttack
         }
     }
 
-    private void LaunchMultipleProjectiles(Transform target, GameObject bulletPrefab, bool isCatapult)
+    private void LaunchMultipleProjectiles(Transform target, UnityEngine.GameObject bulletPrefab, bool isCatapult)
     {
         int numberOfProjectiles = UnityEngine.Random.Range(2, 7);
 
         for (int i = 0; i < numberOfProjectiles; i++)
         {
             Vector3 randomDirection = UnityEngine.Random.onUnitSphere;
-            GameObject projectile = GameObject.Instantiate(bulletPrefab, _bossPosition.position, Quaternion.identity);
+            UnityEngine.GameObject projectile = UnityEngine.GameObject.Instantiate(bulletPrefab, _bossPosition.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
             if (isCatapult)
